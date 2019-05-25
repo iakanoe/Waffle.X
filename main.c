@@ -6,6 +6,7 @@
 #define T_ATRAS 200
 #define T_ESPERA 4970
 //#define T_ACCEL_GIRO 400
+#define T_GIRO_CIEGO 500
 
 void init(){
     //Todo digital
@@ -61,17 +62,17 @@ void init(){
     INTCONbits.GIE = 1;
     
     //Aplica estado inicial
-    setMotores(1000, 0);
+    setMotores(0, 0);
     LAT_LED_R = 0;
     LAT_LED_A = 0;
     LAT_LED_V = 0;
-    while(1);
 }
 
 void loop(){
     static unsigned long m = 0;
     static int estado = MENU;
     static int direccion = DER;
+    static bit ciego; ciego = 1;
     switch(estado){
         case MENU:
             if(btn(BTNL)) {
@@ -104,9 +105,9 @@ void loop(){
             }
             
             setMotores(0, 0);
-            LAT_LED_R = ir(1) || ir(2) || cny(1);
+            LAT_LED_R = ir(2);
             LAT_LED_A = ir(3);
-            LAT_LED_V = ir(4) || ir(5) || cny(2);
+            LAT_LED_V = ir(4);
             break;
             
         case LIMPIAR:
@@ -123,7 +124,7 @@ void loop(){
             
         case ESPERA:
             if(millis() > (m + T_ESPERA)){
-                estado = 1;
+                estado = ANALISIS;
                 LAT_LED_R = 0;
                 LAT_LED_A = 0;
                 LAT_LED_V = 1;
@@ -140,6 +141,11 @@ void loop(){
             if(cny(1) || cny(2)){
                 estado = ATRAS;
                 m = millis();
+                break;
+            }
+            
+            if(ciego){
+                estado = ATAQUE;
                 break;
             }
             
@@ -203,6 +209,11 @@ void loop(){
         case ATRAS:
             if(millis() > (m + T_ATRAS)){
                 estado = ANALISIS;
+                
+                if(ciego){
+                    estado = DERCIEGO;
+                    m = millis();
+                }
                 break;
             }
             
@@ -233,6 +244,15 @@ void loop(){
             estado = ANALISIS;
             break;
             
+        case DERCIEGO:
+            if(millis() > (m + T_GIRO_CIEGO)){
+                estado = ANALISIS;
+                break;
+            }
+            
+            setMotores(GIROVEL, -GIROVEL);
+            break;
+            
         case TEST_CNY:
             LAT_LED_R = !PORT_CNY_1;
             LAT_LED_V = !PORT_CNY_2;
@@ -246,6 +266,8 @@ void loop(){
 }
 
 void setMotores(int dutyI, int dutyD){
+    dutyD = -dutyD;
+    
     dutyI = limitar(dutyI, -1000, 1000);
     dutyD = limitar(dutyD, -1000, 1000);
     

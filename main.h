@@ -75,5 +75,6 @@ enum {
     IZQA,
     IZQAV,
     ATRAS,
-    TEST_CNY
+    TEST_CNY,
+    DERCIEGO
 };
