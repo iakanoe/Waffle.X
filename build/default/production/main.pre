@@ -4281,9 +4281,13 @@ OUTPUT,
 INPUT
 };
 
-# 62
+
+# 65
+#pragma switch time
+
+# 79
 void setMotores(int dutyI, int dutyD);
-unsigned long millis();
+inline unsigned long millis();
 
 enum {
 MENU,
@@ -4302,7 +4306,7 @@ TEST_CNY,
 DERCIEGO
 };
 
-# 11 "main.c"
+# 13 "main.c"
 void init(){
 
 ADCON1bits.PCFG = 0b1111;
@@ -4365,21 +4369,21 @@ LATAbits.LA4 = 0;
 
 void loop(){
 static unsigned long m = 0;
-static int estado = MENU;
-static int direccion = DER;
-static bit ciego; ciego = 1;
+static char estado = MENU;
+static char direccion = DER;
+
 switch(estado){
 case MENU:
-if((0 == 1 ? !PORTAbits.RA1 : (0 == 2 ? !PORTAbits.RA5 : (0 == 0 ? 0 : 0)))) {
+if((unsigned)!0){
 estado = LIMPIAR;
 break;
 }
 
-if((1 == 1 ? !PORTAbits.RA1 : (1 == 2 ? !PORTAbits.RA5 : (1 == 0 ? 0 : 0)))){
+if((unsigned)!PORTAbits.RA1){
 LATAbits.LA2 = 1;
 LATAbits.LA3 = 1;
 LATAbits.LA4 = 1;
-while((1 == 1 ? !PORTAbits.RA1 : (1 == 2 ? !PORTAbits.RA5 : (1 == 0 ? 0 : 0)))){
+while((unsigned)!PORTAbits.RA1){
 m = millis();
 direccion = DER;
 estado = ESPERA;
@@ -4387,11 +4391,11 @@ estado = ESPERA;
 break;
 }
 
-if((2 == 1 ? !PORTAbits.RA1 : (2 == 2 ? !PORTAbits.RA5 : (2 == 0 ? 0 : 0)))){
+if((unsigned)!PORTAbits.RA5){
 LATAbits.LA2 = 1;
 LATAbits.LA3 = 1;
 LATAbits.LA4 = 1;
-while((2 == 1 ? !PORTAbits.RA1 : (2 == 2 ? !PORTAbits.RA5 : (2 == 0 ? 0 : 0)))){
+while((unsigned)!PORTAbits.RA5){
 m = millis();
 direccion = IZQ;
 estado = ESPERA;
@@ -4400,13 +4404,13 @@ break;
 }
 
 setMotores(0, 0);
-LATAbits.LA2 = (2 == 1 ? !PORTBbits.RB5 : (2 == 2 ? !PORTBbits.RB4 : (2 == 3 ? !PORTBbits.RB1 : (2 == 4 ? !PORTCbits.RC5 : (2 == 5 ? !PORTCbits.RC4 : 0)))));
-LATAbits.LA3 = (3 == 1 ? !PORTBbits.RB5 : (3 == 2 ? !PORTBbits.RB4 : (3 == 3 ? !PORTBbits.RB1 : (3 == 4 ? !PORTCbits.RC5 : (3 == 5 ? !PORTCbits.RC4 : 0)))));
-LATAbits.LA4 = (4 == 1 ? !PORTBbits.RB5 : (4 == 2 ? !PORTBbits.RB4 : (4 == 3 ? !PORTBbits.RB1 : (4 == 4 ? !PORTCbits.RC5 : (4 == 5 ? !PORTCbits.RC4 : 0)))));
+LATAbits.LA2 = (unsigned)!PORTBbits.RB4;
+LATAbits.LA3 = (unsigned)!PORTBbits.RB1;
+LATAbits.LA4 = (unsigned)!PORTCbits.RC5;
 break;
 
 case LIMPIAR:
-if(!(0 == 1 ? !PORTAbits.RA1 : (0 == 2 ? !PORTAbits.RA5 : (0 == 0 ? 0 : 0)))){
+if(!(unsigned)!0){
 estado = MENU;
 break;
 }
@@ -4418,7 +4422,7 @@ setMotores(1000, 1000);
 break;
 
 case ESPERA:
-if(millis() > (m + 4970)){
+if(millis() > (m + 4970U)){
 estado = ANALISIS;
 LATAbits.LA2 = 0;
 LATAbits.LA3 = 0;
@@ -4428,62 +4432,22 @@ break;
 
 setMotores(0, 0);
 LATAbits.LA2 = 1;
-LATAbits.LA3 = millis() > (m + (4970 / 2));
+LATAbits.LA3 = (unsigned)(millis() > (m + (4970U / 2)));
 LATAbits.LA4 = 0;
 break;
 
 case ANALISIS:
-if((1 == 1 ? !PORTBbits.RB3 : (1 == 2 ? !PORTCbits.RC6 : 0)) || (2 == 1 ? !PORTBbits.RB3 : (2 == 2 ? !PORTCbits.RC6 : 0))){
+if((unsigned)!PORTBbits.RB3 || (unsigned)!PORTCbits.RC6){
 estado = ATRAS;
 m = millis();
 break;
 }
 
-if(ciego){
+
 estado = ATAQUE;
 break;
-}
 
-if((3 == 1 ? !PORTBbits.RB5 : (3 == 2 ? !PORTBbits.RB4 : (3 == 3 ? !PORTBbits.RB1 : (3 == 4 ? !PORTCbits.RC5 : (3 == 5 ? !PORTCbits.RC4 : 0)))))){
-if((2 == 1 ? !PORTBbits.RB5 : (2 == 2 ? !PORTBbits.RB4 : (2 == 3 ? !PORTBbits.RB1 : (2 == 4 ? !PORTCbits.RC5 : (2 == 5 ? !PORTCbits.RC4 : 0))))) == (4 == 1 ? !PORTBbits.RB5 : (4 == 2 ? !PORTBbits.RB4 : (4 == 3 ? !PORTBbits.RB1 : (4 == 4 ? !PORTCbits.RC5 : (4 == 5 ? !PORTCbits.RC4 : 0)))))){
-estado = ATAQUE;
-break;
-}
-
-if((2 == 1 ? !PORTBbits.RB5 : (2 == 2 ? !PORTBbits.RB4 : (2 == 3 ? !PORTBbits.RB1 : (2 == 4 ? !PORTCbits.RC5 : (2 == 5 ? !PORTCbits.RC4 : 0)))))){
-estado = IZQAV;
-break;
-}
-
-if((4 == 1 ? !PORTBbits.RB5 : (4 == 2 ? !PORTBbits.RB4 : (4 == 3 ? !PORTBbits.RB1 : (4 == 4 ? !PORTCbits.RC5 : (4 == 5 ? !PORTCbits.RC4 : 0)))))){
-estado = DERAV;
-break;
-}
-}
-
-if((2 == 1 ? !PORTBbits.RB5 : (2 == 2 ? !PORTBbits.RB4 : (2 == 3 ? !PORTBbits.RB1 : (2 == 4 ? !PORTCbits.RC5 : (2 == 5 ? !PORTCbits.RC4 : 0)))))){
-estado = IZQA;
-break;
-}
-
-if((4 == 1 ? !PORTBbits.RB5 : (4 == 2 ? !PORTBbits.RB4 : (4 == 3 ? !PORTBbits.RB1 : (4 == 4 ? !PORTCbits.RC5 : (4 == 5 ? !PORTCbits.RC4 : 0)))))){
-estado = DERA;
-break;
-}
-
-if((1 == 1 ? !PORTBbits.RB5 : (1 == 2 ? !PORTBbits.RB4 : (1 == 3 ? !PORTBbits.RB1 : (1 == 4 ? !PORTCbits.RC5 : (1 == 5 ? !PORTCbits.RC4 : 0)))))){
-estado = IZQ;
-break;
-}
-
-if((5 == 1 ? !PORTBbits.RB5 : (5 == 2 ? !PORTBbits.RB4 : (5 == 3 ? !PORTBbits.RB1 : (5 == 4 ? !PORTCbits.RC5 : (5 == 5 ? !PORTCbits.RC4 : 0)))))){
-estado = DER;
-break;
-}
-
-estado = direccion;
-break;
-
+# 195
 case ATAQUE:
 setMotores(1000, 1000);
 estado = ANALISIS;
@@ -4502,13 +4466,14 @@ estado = ANALISIS;
 break;
 
 case ATRAS:
-if(millis() > (m + 200)){
+if(millis() > (m + 200U)){
 estado = ANALISIS;
 
-if(ciego){
+
 estado = DERCIEGO;
 m = millis();
-}
+
+
 break;
 }
 
@@ -4540,7 +4505,7 @@ estado = ANALISIS;
 break;
 
 case DERCIEGO:
-if(millis() > (m + 500)){
+if(millis() > (m + 500U)){
 estado = ANALISIS;
 break;
 }
@@ -4549,28 +4514,28 @@ setMotores(700, -700);
 break;
 
 case TEST_CNY:
-LATAbits.LA2 = !PORTBbits.RB3;
-LATAbits.LA4 = !PORTCbits.RC6;
+LATAbits.LA2 = (unsigned)!PORTBbits.RB3;
+LATAbits.LA4 = (unsigned)!PORTCbits.RC6;
 LATAbits.LA3 = 1;
-if((1 == 1 ? !PORTAbits.RA1 : (1 == 2 ? !PORTAbits.RA5 : (1 == 0 ? 0 : 0))) || (2 == 1 ? !PORTAbits.RA1 : (2 == 2 ? !PORTAbits.RA5 : (2 == 0 ? 0 : 0)))){
-while((1 == 1 ? !PORTAbits.RA1 : (1 == 2 ? !PORTAbits.RA5 : (1 == 0 ? 0 : 0))) || (2 == 1 ? !PORTAbits.RA1 : (2 == 2 ? !PORTAbits.RA5 : (2 == 0 ? 0 : 0))));
+if((unsigned)!PORTAbits.RA1 || (unsigned)!PORTAbits.RA5){
+while((unsigned)!PORTAbits.RA1 || (unsigned)!PORTAbits.RA5);
 estado = 0;
 }
 break;
 }
 }
 
-void setMotores(int dutyI, int dutyD){
-dutyD = -dutyD;
+void setMotores(int speedI, int speedD){
+speedD = -speedD;
 
-dutyI = (dutyI > 1000 ? 1000 : (dutyI < -1000 ? -1000 : dutyI));
-dutyD = (dutyD > 1000 ? 1000 : (dutyD < -1000 ? -1000 : dutyD));
+speedI = (speedI > 1000 ? 1000 : (speedI < -1000 ? -1000 : speedI));
+speedD = (speedD > 1000 ? 1000 : (speedD < -1000 ? -1000 : speedD));
 
-LATAbits.LA0 = dutyI < 0;
-LATCbits.LC0 = dutyD < 0;
+LATAbits.LA0 = (unsigned)(speedI < 0);
+LATCbits.LC0 = (unsigned)(speedD < 0);
 
-dutyI = (dutyI < 0 ? 1000+dutyI : dutyI);
-dutyD = (dutyD < 0 ? 1000+dutyD : dutyD);
+unsigned int dutyI = (unsigned)(speedI < 0 ? 1000+speedI : speedI);
+unsigned int dutyD = (unsigned)(speedD < 0 ? 1000+speedD : speedD);
 
 dutyI *= 1.023;
 dutyD *= 1.023;
@@ -4582,7 +4547,11 @@ CCP2CONbits.DC2B = dutyD % 4;
 }
 
 unsigned long millisCounter = 0;
-unsigned long millis(){ return millisCounter;}
+
+inline unsigned long millis(){
+return millisCounter;
+}
+
 void interrupt ISR(void){
 if(!TMR2IF) return;
 TMR2IF = 0;

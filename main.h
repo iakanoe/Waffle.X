@@ -51,16 +51,33 @@ enum {
     INPUT
 };
 
-#define BTNL 0
+// Arreglo problema del interrupt en XC8 >=2.0
+#if __XC8_VERSION >= 2000
+#   define interrupt __interrupt()
+#endif
 
-#define btn(n) (n == 1 ? !PORT_BTN_1 : (n == 2 ? !PORT_BTN_2 : (n == BTNL ? 0 : 0)))
-#define ir(n) (n == 1 ? !PORT_IR_1 : (n == 2 ? !PORT_IR_2 : (n == 3 ? !PORT_IR_3 : (n == 4 ? !PORT_IR_4 : (n == 5 ? !PORT_IR_5 : 0)))))
-#define cny(n) (n == 1 ? !PORT_CNY_1 : (n == 2 ? !PORT_CNY_2 : 0))
+// Aviso que en este robot no hay BTNL (borrar estas lineas cuando se arregle)
+#warning En Waffle no hay BTNL
+#define PORT_BTN_BTNL 0
+
+// Hago que el switch use el método más rápido de comparación
+// (que es lo más útil para máquinas de estados)
+#pragma switch time
+
+//#define btn(n) (n == 1 ? !PORT_BTN_1 : (n == 2 ? !PORT_BTN_2 : 0))
+//#define ir(n) (n == 1 ? !PORT_IR_1 : (n == 2 ? !PORT_IR_2 : (n == 3 ? !PORT_IR_3 : (n == 4 ? !PORT_IR_4 : (n == 5 ? !PORT_IR_5 : 0)))))
+//#define cny(n) (n == 1 ? !PORT_CNY_1 : (n == 2 ? !PORT_CNY_2 : 0))
+
+// Para no tener conversiones implicitas de signed a unsigned
+#define u (unsigned)
+
+#define btn(n) u!PORT_BTN_ ## n
+#define ir(n) u!PORT_IR_ ## n
+#define cny(n) u!PORT_CNY_ ## n
 #define limitar(x, min, max) (x > max ? max : (x < min ? min : x))
-#define bState(n) estado=n;break
 
 void setMotores(int dutyI, int dutyD);
-unsigned long millis();
+inline unsigned long millis();
 
 enum {
     MENU,

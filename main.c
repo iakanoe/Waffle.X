@@ -3,10 +3,12 @@
 #define GIROVEL 700
 #define ATAQUEVEL 1000
 #define ATRASVEL -1000
-#define T_ATRAS 200
-#define T_ESPERA 4970
-//#define T_ACCEL_GIRO 400
-#define T_GIRO_CIEGO 500
+
+#define T_ATRAS 200U
+#define T_ESPERA 4970U
+#define T_GIRO_CIEGO 500U
+
+#define CIEGO // comentar para que no sea ciego
 
 void init(){
     //Todo digital
@@ -41,7 +43,7 @@ void init(){
 	PR2=249;
 	T2CONbits.TMR2ON=1;
     
-    //Config modulos ccp para PWM
+    //Config modulos CCP para PWM
     CCPR1L=0;
 	CCP1CONbits.DC1B=0;
 	CCP1CONbits.CCP1M=12;
@@ -70,12 +72,12 @@ void init(){
 
 void loop(){
     static unsigned long m = 0;
-    static int estado = MENU;
-    static int direccion = DER;
-    static bit ciego; ciego = 1;
+    static char estado = MENU;
+    static char direccion = DER;
+    
     switch(estado){
         case MENU:
-            if(btn(BTNL)) {
+            if(btn(BTNL)){
                 estado = LIMPIAR;
                 break;
             }
@@ -133,7 +135,7 @@ void loop(){
             
             setMotores(0, 0);
             LAT_LED_R = 1;
-            LAT_LED_A = millis() > (m + (T_ESPERA / 2));
+            LAT_LED_A = u(millis() > (m + (T_ESPERA / 2)));
             LAT_LED_V = 0;
             break;
             
@@ -144,10 +146,10 @@ void loop(){
                 break;
             }
             
-            if(ciego){
+#ifdef CIEGO
                 estado = ATAQUE;
                 break;
-            }
+#else
             
             if(ir(3)){
                 if(ir(2) == ir(4)){
@@ -188,6 +190,7 @@ void loop(){
             
             estado = direccion;
             break;
+#endif
             
         case ATAQUE:
             setMotores(ATAQUEVEL, ATAQUEVEL);
@@ -210,10 +213,11 @@ void loop(){
             if(millis() > (m + T_ATRAS)){
                 estado = ANALISIS;
                 
-                if(ciego){
+                #ifdef CIEGO
                     estado = DERCIEGO;
                     m = millis();
-                }
+                #endif
+                    
                 break;
             }
             
@@ -254,8 +258,8 @@ void loop(){
             break;
             
         case TEST_CNY:
-            LAT_LED_R = !PORT_CNY_1;
-            LAT_LED_V = !PORT_CNY_2;
+            LAT_LED_R = u!PORT_CNY_1;
+            LAT_LED_V = u!PORT_CNY_2;
             LAT_LED_A = 1;
             if(btn(1) || btn(2)){
                 while(btn(1) || btn(2));
@@ -265,17 +269,17 @@ void loop(){
     }
 }
 
-void setMotores(int dutyI, int dutyD){
-    dutyD = -dutyD;
+void setMotores(int speedI, int speedD){
+    speedD = -speedD;
     
-    dutyI = limitar(dutyI, -1000, 1000);
-    dutyD = limitar(dutyD, -1000, 1000);
+    speedI = limitar(speedI, -1000, 1000);
+    speedD = limitar(speedD, -1000, 1000);
     
-    LAT_DIR_I = dutyI < 0;
-    LAT_DIR_D = dutyD < 0;
+    LAT_DIR_I = u(speedI < 0);
+    LAT_DIR_D = u(speedD < 0);
     
-    dutyI = (dutyI < 0 ? 1000+dutyI : dutyI);
-    dutyD = (dutyD < 0 ? 1000+dutyD : dutyD);
+    unsigned int dutyI = u(speedI < 0 ? 1000+speedI : speedI);
+    unsigned int dutyD = u(speedD < 0 ? 1000+speedD : speedD);
     
     dutyI *= 1.023;
     dutyD *= 1.023;
@@ -287,7 +291,11 @@ void setMotores(int dutyI, int dutyD){
 }
 
 unsigned long millisCounter = 0;
-unsigned long millis(){ return millisCounter;}
+
+inline unsigned long millis(){
+    return millisCounter;
+}
+
 void interrupt ISR(void){
     if(!TMR2IF) return;
     TMR2IF = 0;
