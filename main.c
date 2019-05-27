@@ -107,9 +107,9 @@ void loop(){
             }
             
             setMotores(0, 0);
-            LAT_LED_R = ir(2);
+            LAT_LED_R = 0;
             LAT_LED_A = ir(3);
-            LAT_LED_V = ir(4);
+            LAT_LED_V = 0;
             break;
             
         case LIMPIAR:

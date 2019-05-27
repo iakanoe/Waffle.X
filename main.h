@@ -58,7 +58,7 @@ enum {
 
 // Aviso que en este robot no hay BTNL (borrar estas lineas cuando se arregle)
 #warning En Waffle no hay BTNL
-#define PORT_BTN_BTNL 0
+#define PORT_BTN_BTNL 1
 
 // Hago que el switch use el método más rápido de comparación
 // (que es lo más útil para máquinas de estados)

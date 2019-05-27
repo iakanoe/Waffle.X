@@ -4374,7 +4374,7 @@ static char direccion = DER;
 
 switch(estado){
 case MENU:
-if((unsigned)!0){
+if((unsigned)!1){
 estado = LIMPIAR;
 break;
 }
@@ -4404,13 +4404,13 @@ break;
 }
 
 setMotores(0, 0);
-LATAbits.LA2 = (unsigned)!PORTBbits.RB4;
+LATAbits.LA2 = 0;
 LATAbits.LA3 = (unsigned)!PORTBbits.RB1;
-LATAbits.LA4 = (unsigned)!PORTCbits.RC5;
+LATAbits.LA4 = 0;
 break;
 
 case LIMPIAR:
-if(!(unsigned)!0){
+if(!(unsigned)!1){
 estado = MENU;
 break;
 }

@@ -3601,9 +3601,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 79: case MENU:
 "79
 [e :U 326 ]
-[; ;main.c: 80: if((unsigned)!0){
+[; ;main.c: 80: if((unsigned)!1){
 "80
-[e $ ! != -> -> ! != -> 0 `i -> 0 `i `i `ui -> -> 0 `i `ui 327  ]
+[e $ ! != -> -> ! != -> 1 `i -> 0 `i `i `ui -> -> 0 `i `ui 327  ]
 {
 [; ;main.c: 81: estado = LIMPIAR;
 "81
@@ -3700,24 +3700,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 109: setMotores(0, 0);
 "109
 [e ( _setMotores (2 , -> 0 `i -> 0 `i ]
-[; ;main.c: 110: LATAbits.LA2 = (unsigned)!PORTBbits.RB4;
+[; ;main.c: 110: LATAbits.LA2 = 0;
 "110
-[e = . . _LATAbits 1 2 -> -> -> ! != -> . . _PORTBbits 0 4 `i -> -> -> 0 `i `Vuc `i `i `ui `uc ]
+[e = . . _LATAbits 1 2 -> -> 0 `i `uc ]
 [; ;main.c: 111: LATAbits.LA3 = (unsigned)!PORTBbits.RB1;
 "111
 [e = . . _LATAbits 1 3 -> -> -> ! != -> . . _PORTBbits 0 1 `i -> -> -> 0 `i `Vuc `i `i `ui `uc ]
-[; ;main.c: 112: LATAbits.LA4 = (unsigned)!PORTCbits.RC5;
+[; ;main.c: 112: LATAbits.LA4 = 0;
 "112
-[e = . . _LATAbits 1 4 -> -> -> ! != -> . . _PORTCbits 0 5 `i -> -> -> 0 `i `Vuc `i `i `ui `uc ]
+[e = . . _LATAbits 1 4 -> -> 0 `i `uc ]
 [; ;main.c: 113: break;
 "113
 [e $U 324  ]
 [; ;main.c: 115: case LIMPIAR:
 "115
 [e :U 336 ]
-[; ;main.c: 116: if(!(unsigned)!0){
+[; ;main.c: 116: if(!(unsigned)!1){
 "116
-[e $ ! ! != -> -> ! != -> 0 `i -> 0 `i `i `ui -> -> 0 `i `ui 337  ]
+[e $ ! ! != -> -> ! != -> 1 `i -> 0 `i `i `ui -> -> 0 `i `ui 337  ]
 {
 [; ;main.c: 117: estado = MENU;
 "117
@@ -4099,9 +4099,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 359 ]
 }
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-[v F3381 `(v ~T0 @X0 1 tf ]
+[v F3379 `(v ~T0 @X0 1 tf ]
 "299
-[v _ISR `IF3381 ~T0 @X0 1 e ]
+[v _ISR `IF3379 ~T0 @X0 1 e ]
 {
 [; ;main.c: 299: void interrupt ISR(void){
 [e :U _ISR ]
