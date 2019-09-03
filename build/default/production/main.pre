@@ -4282,10 +4282,10 @@ INPUT
 };
 
 
-# 65
+# 61
 #pragma switch time
 
-# 79
+# 75
 void setMotores(int dutyI, int dutyD);
 inline unsigned long millis();
 
@@ -4298,9 +4298,11 @@ ATAQUE,
 DER,
 DERA,
 DERAV,
+DERB,
 IZQ,
 IZQA,
 IZQAV,
+IZQB,
 ATRAS,
 TEST_CNY,
 DERCIEGO
@@ -4374,20 +4376,16 @@ static char direccion = DER;
 
 switch(estado){
 case MENU:
-if((unsigned)!1){
-estado = LIMPIAR;
-break;
-}
-
 if((unsigned)!PORTAbits.RA1){
 LATAbits.LA2 = 1;
 LATAbits.LA3 = 1;
 LATAbits.LA4 = 1;
-while((unsigned)!PORTAbits.RA1){
 m = millis();
 direccion = DER;
 estado = ESPERA;
-}
+while((unsigned)!PORTAbits.RA1)
+while((unsigned)!PORTAbits.RA5)
+estado = LIMPIAR;
 break;
 }
 
@@ -4395,23 +4393,25 @@ if((unsigned)!PORTAbits.RA5){
 LATAbits.LA2 = 1;
 LATAbits.LA3 = 1;
 LATAbits.LA4 = 1;
-while((unsigned)!PORTAbits.RA5){
 m = millis();
 direccion = IZQ;
 estado = ESPERA;
-}
+while((unsigned)!PORTAbits.RA5)
+while((unsigned)!PORTAbits.RA1)
+estado = LIMPIAR;
 break;
 }
 
 setMotores(0, 0);
-LATAbits.LA2 = 0;
-LATAbits.LA3 = (unsigned)!PORTBbits.RB1;
-LATAbits.LA4 = 0;
+LATAbits.LA2 = (unsigned)((unsigned)!PORTBbits.RB5 || (unsigned)!PORTBbits.RB4 || (unsigned)!PORTBbits.RB3);
+LATAbits.LA3 = (unsigned)((unsigned)!PORTBbits.RB1);
+LATAbits.LA4 = (unsigned)((unsigned)!PORTCbits.RC5 || (unsigned)!PORTCbits.RC4 || (unsigned)!PORTCbits.RC6);
 break;
 
 case LIMPIAR:
-if(!(unsigned)!1){
+if((unsigned)!PORTAbits.RA1 || (unsigned)!PORTAbits.RA5){
 estado = MENU;
+while((unsigned)!PORTAbits.RA1 || (unsigned)!PORTAbits.RA5);
 break;
 }
 
@@ -4443,11 +4443,50 @@ m = millis();
 break;
 }
 
-
+# 152
+if((unsigned)!PORTBbits.RB1){
+if((unsigned)!PORTBbits.RB4 == (unsigned)!PORTCbits.RC5){
 estado = ATAQUE;
 break;
+}
 
-# 195
+if((unsigned)!PORTBbits.RB4){
+estado = IZQAV;
+break;
+}
+
+if((unsigned)!PORTCbits.RC5){
+estado = DERAV;
+break;
+}
+}
+
+if((unsigned)!PORTBbits.RB4){
+estado = IZQA;
+break;
+}
+
+if((unsigned)!PORTCbits.RC5){
+estado = DERA;
+break;
+}
+
+if((unsigned)!PORTBbits.RB5){
+estado = IZQ;
+break;
+}
+
+if((unsigned)!PORTCbits.RC4){
+estado = DER;
+break;
+}
+
+estado = direccion;
+
+
+break;
+
+
 case ATAQUE:
 setMotores(1000, 1000);
 estado = ANALISIS;
@@ -4466,14 +4505,10 @@ estado = ANALISIS;
 break;
 
 case ATRAS:
-if(millis() > (m + 200U)){
+if(millis() > (m + 300U)){
 estado = ANALISIS;
 
-
-estado = DERCIEGO;
-m = millis();
-
-
+# 221
 break;
 }
 
@@ -4500,6 +4535,18 @@ break;
 
 case DER:
 setMotores(700, -700);
+direccion = DER;
+estado = ANALISIS;
+break;
+
+case IZQB:
+setMotores(0, 700);
+direccion = IZQ;
+estado = ANALISIS;
+break;
+
+case DERB:
+setMotores(700, 0);
 direccion = DER;
 estado = ANALISIS;
 break;

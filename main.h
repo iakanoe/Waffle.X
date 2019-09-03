@@ -56,10 +56,6 @@ enum {
 #   define interrupt __interrupt()
 #endif
 
-// Aviso que en este robot no hay BTNL (borrar estas lineas cuando se arregle)
-#warning En Waffle no hay BTNL
-#define PORT_BTN_BTNL 1
-
 // Hago que el switch use el método más rápido de comparación
 // (que es lo más útil para máquinas de estados)
 #pragma switch time
@@ -88,9 +84,11 @@ enum {
     DER, 
     DERA,
     DERAV,
+    DERB,
     IZQ, 
     IZQA,
     IZQAV,
+    IZQB,
     ATRAS,
     TEST_CNY,
     DERCIEGO

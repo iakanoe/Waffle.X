@@ -4,11 +4,11 @@
 #define ATAQUEVEL 1000
 #define ATRASVEL -1000
 
-#define T_ATRAS 200U
+#define T_ATRAS 300U
 #define T_ESPERA 4970U
 #define T_GIRO_CIEGO 500U
 
-#define CIEGO // comentar para que no sea ciego
+//#define CIEGO // comentar para que no sea ciego
 
 void init(){
     //Todo digital
@@ -76,21 +76,17 @@ void loop(){
     static char direccion = DER;
     
     switch(estado){
-        case MENU:
-            if(btn(BTNL)){
-                estado = LIMPIAR;
-                break;
-            }
-            
+        case MENU:            
             if(btn(1)){
                 LAT_LED_R = 1;
                 LAT_LED_A = 1;
                 LAT_LED_V = 1;
-                while(btn(1)){
-                    m = millis();
-                    direccion = DER;
-                    estado = ESPERA;
-                }
+                m = millis();
+                direccion = DER;
+                estado = ESPERA;
+                while(btn(1))
+                    while(btn(2))
+                        estado = LIMPIAR;
                 break;
             }
             
@@ -98,23 +94,25 @@ void loop(){
                 LAT_LED_R = 1;
                 LAT_LED_A = 1;
                 LAT_LED_V = 1;
-                while(btn(2)){
-                    m = millis();
-                    direccion = IZQ;
-                    estado = ESPERA;
-                }
+                m = millis();
+                direccion = IZQ;
+                estado = ESPERA;
+                while(btn(2))
+                    while(btn(1))
+                        estado = LIMPIAR;
                 break;
             }
             
             setMotores(0, 0);
-            LAT_LED_R = 0;
-            LAT_LED_A = ir(3);
-            LAT_LED_V = 0;
+            LAT_LED_R = u(ir(1) || ir(2) || cny(1));
+            LAT_LED_A = u(ir(3));
+            LAT_LED_V = u(ir(4) || ir(5) || cny(2));
             break;
             
         case LIMPIAR:
-            if(!btn(BTNL)){
+            if(btn(1) || btn(2)){
                 estado = MENU;
+                while(btn(1) || btn(2));
                 break;
             }
             
@@ -189,6 +187,8 @@ void loop(){
             }
             
             estado = direccion;
+                
+            //estado = direccion == DER ? DERB : (direccion == IZQ ? IZQB : DER);
             break;
 #endif
             
@@ -244,6 +244,18 @@ void loop(){
             
         case DER:
             setMotores(GIROVEL, -GIROVEL);
+            direccion = DER;
+            estado = ANALISIS;
+            break;
+            
+        case IZQB:
+            setMotores(0, GIROVEL);
+            direccion = IZQ;
+            estado = ANALISIS;
+            break;
+            
+        case DERB:
+            setMotores(GIROVEL, 0);
             direccion = DER;
             estado = ANALISIS;
             break;

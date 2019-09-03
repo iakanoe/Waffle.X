@@ -18,12 +18,14 @@ ATAQUE 4
 DER 5
 DERA 6
 DERAV 7
-IZQ 8
-IZQA 9
-IZQAV 10
-ATRAS 11
-TEST_CNY 12
-DERCIEGO 13
+DERB 8
+IZQ 9
+IZQA 10
+IZQAV 11
+IZQB 12
+ATRAS 13
+TEST_CNY 14
+DERCIEGO 15
 ]
 "62 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
@@ -53,13 +55,13 @@ DERCIEGO 13
 [v _init init `(v  1 e 1 0 ]
 "73
 [v _loop loop `(v  1 e 1 0 ]
-"272
+"284
 [v _setMotores setMotores `(v  1 e 1 0 ]
-"295
+"307
 [v _millis millis `T(ul  1 e 4 0 ]
-"299
+"311
 [v _ISR ISR `II(v  1 e 1 0 ]
-"305
+"317
 [v _main main `(v  1 e 1 0 ]
 [s S56 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 SUSPND 1 0 :1:1 
@@ -98,7 +100,7 @@ DERCIEGO 13
 `uc 1 RA6 1 0 :1:6 
 ]
 "2154
-[s S535 . 1 `uc 1 AN0 1 0 :1:0 
+[s S537 . 1 `uc 1 AN0 1 0 :1:0 
 `uc 1 AN1 1 0 :1:1 
 `uc 1 AN2 1 0 :1:2 
 `uc 1 AN3 1 0 :1:3 
@@ -106,19 +108,19 @@ DERCIEGO 13
 `uc 1 AN4 1 0 :1:5 
 `uc 1 OSC2 1 0 :1:6 
 ]
-[s S543 . 1 `uc 1 . 1 0 :2:0 
+[s S545 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 VREFM 1 0 :1:2 
 `uc 1 VREFP 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
 `uc 1 LVDIN 1 0 :1:5 
 ]
-[s S549 . 1 `uc 1 . 1 0 :5:0 
+[s S551 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 HLVDIN 1 0 :1:5 
 ]
-[s S552 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+[s S554 . 1 `uc 1 ULPWUIN 1 0 :1:0 
 ]
-[u S554 . 1 `S116 1 . 1 0 `S535 1 . 1 0 `S543 1 . 1 0 `S549 1 . 1 0 `S552 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES554  1 e 1 @3968 ]
+[u S556 . 1 `S116 1 . 1 0 `S537 1 . 1 0 `S545 1 . 1 0 `S551 1 . 1 0 `S554 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES556  1 e 1 @3968 ]
 [s S156 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
@@ -129,7 +131,7 @@ DERCIEGO 13
 `uc 1 RB7 1 0 :1:7 
 ]
 "2284
-[s S602 . 1 `uc 1 INT0 1 0 :1:0 
+[s S604 . 1 `uc 1 INT0 1 0 :1:0 
 `uc 1 INT1 1 0 :1:1 
 `uc 1 INT2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
@@ -137,12 +139,12 @@ DERCIEGO 13
 `uc 1 PGC 1 0 :1:6 
 `uc 1 PGD 1 0 :1:7 
 ]
-[s S610 . 1 `uc 1 . 1 0 :3:0 
+[s S612 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CCP2_PA2 1 0 :1:3 
 ]
-[u S613 . 1 `S156 1 . 1 0 `S602 1 . 1 0 `S610 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES613  1 e 1 @3969 ]
-[s S638 . 1 `uc 1 RC0 1 0 :1:0 
+[u S615 . 1 `S156 1 . 1 0 `S604 1 . 1 0 `S612 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES615  1 e 1 @3969 ]
+[s S640 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -152,29 +154,29 @@ DERCIEGO 13
 `uc 1 RC7 1 0 :1:7 
 ]
 "2406
-[s S647 . 1 `uc 1 T1OSO 1 0 :1:0 
+[s S649 . 1 `uc 1 T1OSO 1 0 :1:0 
 `uc 1 T1OSI 1 0 :1:1 
 `uc 1 CCP1 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
 `uc 1 TX 1 0 :1:6 
 `uc 1 RX 1 0 :1:7 
 ]
-[s S654 . 1 `uc 1 T13CKI 1 0 :1:0 
+[s S656 . 1 `uc 1 T13CKI 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 P1A 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
 `uc 1 CK 1 0 :1:6 
 `uc 1 DT 1 0 :1:7 
 ]
-[s S661 . 1 `uc 1 . 1 0 :1:0 
+[s S663 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 CCP2 1 0 :1:1 
 `uc 1 PA1 1 0 :1:2 
 ]
-[s S665 . 1 `uc 1 . 1 0 :1:0 
+[s S667 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 PA2 1 0 :1:1 
 ]
-[u S668 . 1 `S638 1 . 1 0 `S647 1 . 1 0 `S654 1 . 1 0 `S661 1 . 1 0 `S665 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES668  1 e 1 @3970 ]
+[u S670 . 1 `S640 1 . 1 0 `S649 1 . 1 0 `S656 1 . 1 0 `S663 1 . 1 0 `S667 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES670  1 e 1 @3970 ]
 [s S476 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
@@ -194,7 +196,7 @@ DERCIEGO 13
 ]
 [u S492 . 1 `S476 1 . 1 0 `S484 1 . 1 0 ]
 [v _LATAbits LATAbits `VES492  1 e 1 @3977 ]
-[s S705 . 1 `uc 1 LATC0 1 0 :1:0 
+[s S707 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
@@ -202,15 +204,15 @@ DERCIEGO 13
 `uc 1 LATC7 1 0 :1:7 
 ]
 "2780
-[s S712 . 1 `uc 1 LC0 1 0 :1:0 
+[s S714 . 1 `uc 1 LC0 1 0 :1:0 
 `uc 1 LC1 1 0 :1:1 
 `uc 1 LC2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
 `uc 1 LC6 1 0 :1:6 
 `uc 1 LC7 1 0 :1:7 
 ]
-[u S719 . 1 `S705 1 . 1 0 `S712 1 . 1 0 ]
-[v _LATCbits LATCbits `VES719  1 e 1 @3979 ]
+[u S721 . 1 `S707 1 . 1 0 `S714 1 . 1 0 ]
+[v _LATCbits LATCbits `VES721  1 e 1 @3979 ]
 [s S108 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
@@ -409,12 +411,12 @@ DERCIEGO 13
 [v _INTCONbits INTCONbits `VES443  1 e 1 @4082 ]
 "8850
 [v _TMR2IF TMR2IF `VEb  1 e 0 @31985 ]
-"293 C:\Users\Ianick\Proyectos\Waffle.X\main.c
+"305 C:\Users\Ianick\Proyectos\Waffle.X\main.c
 [v _millisCounter millisCounter `ul  1 e 4 0 ]
-"305
+"317
 [v _main main `(v  1 e 1 0 ]
 {
-"308
+"320
 } 0
 "73
 [v _loop loop `(v  1 e 1 0 ]
@@ -425,29 +427,29 @@ DERCIEGO 13
 [v loop@estado estado `uc  1 s 1 estado ]
 "76
 [v loop@direccion direccion `uc  1 s 1 direccion ]
-"270
+"282
 } 0
-"295
+"307
 [v _millis millis `T(ul  1 e 4 0 ]
 {
-"297
+"309
 } 0
 "13
 [v _init init `(v  1 e 1 0 ]
 {
 "71
 } 0
-"272
+"284
 [v _setMotores setMotores `(v  1 e 1 0 ]
 {
-"282
+"294
 [v setMotores@dutyD dutyD `ui  1 a 2 6 ]
-"281
+"293
 [v setMotores@dutyI dutyI `ui  1 a 2 4 ]
-"272
+"284
 [v setMotores@speedI speedI `i  1 p 2 59 ]
 [v setMotores@speedD speedD `i  1 p 2 61 ]
-"291
+"303
 } 0
 "28 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwtoft.c
 [v ___lwtoft __lwtoft `(f  1 e 3 0 ]
@@ -489,8 +491,8 @@ DERCIEGO 13
 [v ___ftpack@sign sign `uc  1 p 1 22 ]
 "86
 } 0
-"299 C:\Users\Ianick\Proyectos\Waffle.X\main.c
+"311 C:\Users\Ianick\Proyectos\Waffle.X\main.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"303
+"315
 } 0
