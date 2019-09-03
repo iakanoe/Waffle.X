@@ -46,6 +46,9 @@
 #define LAT_PWM_D   LATCbits.LC1
 #define LAT_PWM_I   LATCbits.LC2
 
+#define TRIS_SWITCH TRISCbits.RC7
+#define PORT_SWITCH PORTCbits.RC7
+
 enum {
     OUTPUT,
     INPUT
@@ -60,36 +63,46 @@ enum {
 // (que es lo más útil para máquinas de estados)
 #pragma switch time
 
-//#define btn(n) (n == 1 ? !PORT_BTN_1 : (n == 2 ? !PORT_BTN_2 : 0))
-//#define ir(n) (n == 1 ? !PORT_IR_1 : (n == 2 ? !PORT_IR_2 : (n == 3 ? !PORT_IR_3 : (n == 4 ? !PORT_IR_4 : (n == 5 ? !PORT_IR_5 : 0)))))
-//#define cny(n) (n == 1 ? !PORT_CNY_1 : (n == 2 ? !PORT_CNY_2 : 0))
-
 // Para no tener conversiones implicitas de signed a unsigned
 #define u (unsigned)
 
 #define btn(n) u!PORT_BTN_ ## n
 #define ir(n) u!PORT_IR_ ## n
 #define cny(n) u!PORT_CNY_ ## n
+#define sw() u!PORT_SWITCH
 #define limitar(x, min, max) (x > max ? max : (x < min ? min : x))
 
-void setMotores(int dutyI, int dutyD);
+inline void init();
+inline void loop();
+inline void setMotores(int dutyI, int dutyD);
 inline unsigned long millis();
 
-enum {
+inline void estrategiaClasica();
+inline void estrategiaCiego();
+inline void estrategiaAdelante();
+inline void estrategiaAtras();
+
+enum { // Estados menu
     MENU,
     LIMPIAR,
     ESPERA,
+    E_CLASICA,
+    E_CIEGO,
+    E_ADELANTE,
+    E_ATRAS
+};
+
+enum { // Estados estrategias
     ANALISIS,
-    ATAQUE, 
-    DER, 
+    ATAQUE,
+    DER,
     DERA,
     DERAV,
-    DERB,
-    IZQ, 
+    IZQ,
     IZQA,
     IZQAV,
-    IZQB,
     ATRAS,
-    TEST_CNY,
-    DERCIEGO
+    POSICIONAR,
+    AVANZAR,
+    FRENAR
 };

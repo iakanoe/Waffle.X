@@ -3,29 +3,35 @@
 [d edition pro ]
 [d chip 18F2550 ]
 [d frameptr 4065 ]
-"22 C:\Users\Ianick\Proyectos\Waffle.X\main.c
-[e E3323 . `uc
-OUTPUT 0
-INPUT 1
+"4 C:\Users\Ianick\Proyectos\Waffle.X\main.c
+[e E3352 . `uc
+ANALISIS 0
+ATAQUE 1
+DER 2
+DERA 3
+DERAV 4
+IZQ 5
+IZQA 6
+IZQAV 7
+ATRAS 8
+POSICIONAR 9
+AVANZAR 10
+FRENAR 11
 ]
-"75
-[e E3331 . `uc
+"5
+[e E3344 . `uc
 MENU 0
 LIMPIAR 1
 ESPERA 2
-ANALISIS 3
-ATAQUE 4
-DER 5
-DERA 6
-DERAV 7
-DERB 8
-IZQ 9
-IZQA 10
-IZQAV 11
-IZQB 12
-ATRAS 13
-TEST_CNY 14
-DERCIEGO 15
+E_CLASICA 3
+E_CIEGO 4
+E_ADELANTE 5
+E_ATRAS 6
+]
+"14 C:\Users\Ianick\Proyectos\Waffle.X\funciones.c
+[e E3323 . `uc
+OUTPUT 0
+INPUT 1
 ]
 "62 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
@@ -51,19 +57,27 @@ DERCIEGO 15
 [v ___flmul __flmul `(d  1 e 3 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"13 C:\Users\Ianick\Proyectos\Waffle.X\main.c
-[v _init init `(v  1 e 1 0 ]
-"73
-[v _loop loop `(v  1 e 1 0 ]
-"284
-[v _setMotores setMotores `(v  1 e 1 0 ]
-"307
+"5 C:\Users\Ianick\Proyectos\Waffle.X\funciones.c
+[v _init init `T(v  1 e 1 0 ]
+"66
+[v _setMotores setMotores `T(v  1 e 1 0 ]
+"87
 [v _millis millis `T(ul  1 e 4 0 ]
-"311
+"91
 [v _ISR ISR `II(v  1 e 1 0 ]
-"317
+"7 C:\Users\Ianick\Proyectos\Waffle.X\main.c
+[v _loop loop `T(v  1 e 1 0 ]
+"100
+[v _estrategiaClasica estrategiaClasica `T(v  1 e 1 0 ]
+"212
+[v _estrategiaCiego estrategiaCiego `T(v  1 e 1 0 ]
+"262
+[v _estrategiaAdelante estrategiaAdelante `T(v  1 e 1 0 ]
+"295
+[v _estrategiaAtras estrategiaAtras `T(v  1 e 1 0 ]
+"328
 [v _main main `(v  1 e 1 0 ]
-[s S56 . 1 `uc 1 . 1 0 :1:0 
+[s S379 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 SUSPND 1 0 :1:1 
 `uc 1 RESUME 1 0 :1:2 
 `uc 1 USBEN 1 0 :1:3 
@@ -72,9 +86,9 @@ DERCIEGO 15
 `uc 1 PPBRST 1 0 :1:6 
 ]
 "465 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f2550.h
-[u S64 . 1 `S56 1 . 1 0 ]
-[v _UCONbits UCONbits `VES64  1 e 1 @3949 ]
-[s S75 . 1 `uc 1 PPB 1 0 :2:0 
+[u S387 . 1 `S379 1 . 1 0 ]
+[v _UCONbits UCONbits `VES387  1 e 1 @3949 ]
+[s S398 . 1 `uc 1 PPB 1 0 :2:0 
 `uc 1 FSEN 1 0 :1:2 
 `uc 1 UTRDIS 1 0 :1:3 
 `uc 1 UPUEN 1 0 :1:4 
@@ -83,15 +97,15 @@ DERCIEGO 15
 `uc 1 UTEYE 1 0 :1:7 
 ]
 "588
-[s S83 . 1 `uc 1 PPB0 1 0 :1:0 
+[s S406 . 1 `uc 1 PPB0 1 0 :1:0 
 `uc 1 PPB1 1 0 :1:1 
 ]
-[s S86 . 1 `uc 1 UPP0 1 0 :1:0 
+[s S409 . 1 `uc 1 UPP0 1 0 :1:0 
 `uc 1 UPP1 1 0 :1:1 
 ]
-[u S89 . 1 `S75 1 . 1 0 `S83 1 . 1 0 `S86 1 . 1 0 ]
-[v _UCFGbits UCFGbits `VES89  1 e 1 @3951 ]
-[s S116 . 1 `uc 1 RA0 1 0 :1:0 
+[u S412 . 1 `S398 1 . 1 0 `S406 1 . 1 0 `S409 1 . 1 0 ]
+[v _UCFGbits UCFGbits `VES412  1 e 1 @3951 ]
+[s S42 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -100,7 +114,7 @@ DERCIEGO 15
 `uc 1 RA6 1 0 :1:6 
 ]
 "2154
-[s S537 . 1 `uc 1 AN0 1 0 :1:0 
+[s S50 . 1 `uc 1 AN0 1 0 :1:0 
 `uc 1 AN1 1 0 :1:1 
 `uc 1 AN2 1 0 :1:2 
 `uc 1 AN3 1 0 :1:3 
@@ -108,20 +122,20 @@ DERCIEGO 15
 `uc 1 AN4 1 0 :1:5 
 `uc 1 OSC2 1 0 :1:6 
 ]
-[s S545 . 1 `uc 1 . 1 0 :2:0 
+[s S58 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 VREFM 1 0 :1:2 
 `uc 1 VREFP 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
 `uc 1 LVDIN 1 0 :1:5 
 ]
-[s S551 . 1 `uc 1 . 1 0 :5:0 
+[s S64 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 HLVDIN 1 0 :1:5 
 ]
-[s S554 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+[s S67 . 1 `uc 1 ULPWUIN 1 0 :1:0 
 ]
-[u S556 . 1 `S116 1 . 1 0 `S537 1 . 1 0 `S545 1 . 1 0 `S551 1 . 1 0 `S554 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES556  1 e 1 @3968 ]
-[s S156 . 1 `uc 1 RB0 1 0 :1:0 
+[u S69 . 1 `S42 1 . 1 0 `S50 1 . 1 0 `S58 1 . 1 0 `S64 1 . 1 0 `S67 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES69  1 e 1 @3968 ]
+[s S151 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -131,7 +145,7 @@ DERCIEGO 15
 `uc 1 RB7 1 0 :1:7 
 ]
 "2284
-[s S604 . 1 `uc 1 INT0 1 0 :1:0 
+[s S160 . 1 `uc 1 INT0 1 0 :1:0 
 `uc 1 INT1 1 0 :1:1 
 `uc 1 INT2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
@@ -139,12 +153,12 @@ DERCIEGO 15
 `uc 1 PGC 1 0 :1:6 
 `uc 1 PGD 1 0 :1:7 
 ]
-[s S612 . 1 `uc 1 . 1 0 :3:0 
+[s S168 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CCP2_PA2 1 0 :1:3 
 ]
-[u S615 . 1 `S156 1 . 1 0 `S604 1 . 1 0 `S612 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES615  1 e 1 @3969 ]
-[s S640 . 1 `uc 1 RC0 1 0 :1:0 
+[u S171 . 1 `S151 1 . 1 0 `S160 1 . 1 0 `S168 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES171  1 e 1 @3969 ]
+[s S196 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -154,30 +168,30 @@ DERCIEGO 15
 `uc 1 RC7 1 0 :1:7 
 ]
 "2406
-[s S649 . 1 `uc 1 T1OSO 1 0 :1:0 
+[s S205 . 1 `uc 1 T1OSO 1 0 :1:0 
 `uc 1 T1OSI 1 0 :1:1 
 `uc 1 CCP1 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
 `uc 1 TX 1 0 :1:6 
 `uc 1 RX 1 0 :1:7 
 ]
-[s S656 . 1 `uc 1 T13CKI 1 0 :1:0 
+[s S212 . 1 `uc 1 T13CKI 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 P1A 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
 `uc 1 CK 1 0 :1:6 
 `uc 1 DT 1 0 :1:7 
 ]
-[s S663 . 1 `uc 1 . 1 0 :1:0 
+[s S219 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 CCP2 1 0 :1:1 
 `uc 1 PA1 1 0 :1:2 
 ]
-[s S667 . 1 `uc 1 . 1 0 :1:0 
+[s S223 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 PA2 1 0 :1:1 
 ]
-[u S670 . 1 `S640 1 . 1 0 `S649 1 . 1 0 `S656 1 . 1 0 `S663 1 . 1 0 `S667 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES670  1 e 1 @3970 ]
-[s S476 . 1 `uc 1 LATA0 1 0 :1:0 
+[u S226 . 1 `S196 1 . 1 0 `S205 1 . 1 0 `S212 1 . 1 0 `S219 1 . 1 0 `S223 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES226  1 e 1 @3970 ]
+[s S103 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 LATA3 1 0 :1:3 
@@ -186,7 +200,7 @@ DERCIEGO 15
 `uc 1 LATA6 1 0 :1:6 
 ]
 "2570
-[s S484 . 1 `uc 1 LA0 1 0 :1:0 
+[s S111 . 1 `uc 1 LA0 1 0 :1:0 
 `uc 1 LA1 1 0 :1:1 
 `uc 1 LA2 1 0 :1:2 
 `uc 1 LA3 1 0 :1:3 
@@ -194,9 +208,9 @@ DERCIEGO 15
 `uc 1 LA5 1 0 :1:5 
 `uc 1 LA6 1 0 :1:6 
 ]
-[u S492 . 1 `S476 1 . 1 0 `S484 1 . 1 0 ]
-[v _LATAbits LATAbits `VES492  1 e 1 @3977 ]
-[s S707 . 1 `uc 1 LATC0 1 0 :1:0 
+[u S119 . 1 `S103 1 . 1 0 `S111 1 . 1 0 ]
+[v _LATAbits LATAbits `VES119  1 e 1 @3977 ]
+[s S815 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
@@ -204,16 +218,16 @@ DERCIEGO 15
 `uc 1 LATC7 1 0 :1:7 
 ]
 "2780
-[s S714 . 1 `uc 1 LC0 1 0 :1:0 
+[s S822 . 1 `uc 1 LC0 1 0 :1:0 
 `uc 1 LC1 1 0 :1:1 
 `uc 1 LC2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
 `uc 1 LC6 1 0 :1:6 
 `uc 1 LC7 1 0 :1:7 
 ]
-[u S721 . 1 `S707 1 . 1 0 `S714 1 . 1 0 ]
-[v _LATCbits LATCbits `VES721  1 e 1 @3979 ]
-[s S108 . 1 `uc 1 TRISA0 1 0 :1:0 
+[u S829 . 1 `S815 1 . 1 0 `S822 1 . 1 0 ]
+[v _LATCbits LATCbits `VES829  1 e 1 @3979 ]
+[s S431 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -222,9 +236,9 @@ DERCIEGO 15
 `uc 1 TRISA6 1 0 :1:6 
 ]
 "2865
-[u S124 . 1 `S108 1 . 1 0 `S116 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES124  1 e 1 @3986 ]
-[s S147 . 1 `uc 1 TRISB0 1 0 :1:0 
+[u S447 . 1 `S431 1 . 1 0 `S42 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES447  1 e 1 @3986 ]
+[s S502 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -234,9 +248,9 @@ DERCIEGO 15
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "3065
-[u S165 . 1 `S147 1 . 1 0 `S156 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES165  1 e 1 @3987 ]
-[s S187 . 1 `uc 1 TRISC0 1 0 :1:0 
+[u S520 . 1 `S502 1 . 1 0 `S151 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES520  1 e 1 @3987 ]
+[s S470 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
@@ -244,18 +258,18 @@ DERCIEGO 15
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "3283
-[s S194 . 1 `uc 1 RC0 1 0 :1:0 
+[s S477 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
 `uc 1 RC6 1 0 :1:6 
 `uc 1 RC7 1 0 :1:7 
 ]
-[u S201 . 1 `S187 1 . 1 0 `S194 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES201  1 e 1 @3988 ]
+[u S484 . 1 `S470 1 . 1 0 `S477 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES484  1 e 1 @3988 ]
 "3468
 [v _PIE1 PIE1 `VEuc  1 e 1 @3997 ]
-[s S393 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S716 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -264,70 +278,70 @@ DERCIEGO 15
 `uc 1 ADIE 1 0 :1:6 
 ]
 "3489
-[s S401 . 1 `uc 1 . 1 0 :4:0 
+[s S724 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IE 1 0 :1:4 
 `uc 1 RC1IE 1 0 :1:5 
 ]
-[u S405 . 1 `S393 1 . 1 0 `S401 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES405  1 e 1 @3997 ]
+[u S728 . 1 `S716 1 . 1 0 `S724 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES728  1 e 1 @3997 ]
 "3681
 [v _PIE2 PIE2 `VEuc  1 e 1 @4000 ]
-[s S288 . 1 `uc 1 CCP2M 1 0 :4:0 
+[s S611 . 1 `uc 1 CCP2M 1 0 :4:0 
 `uc 1 DC2B 1 0 :2:4 
 ]
 "5176
-[s S291 . 1 `uc 1 CCP2M0 1 0 :1:0 
+[s S614 . 1 `uc 1 CCP2M0 1 0 :1:0 
 `uc 1 CCP2M1 1 0 :1:1 
 `uc 1 CCP2M2 1 0 :1:2 
 `uc 1 CCP2M3 1 0 :1:3 
 `uc 1 DC2B0 1 0 :1:4 
 `uc 1 DC2B1 1 0 :1:5 
 ]
-[u S298 . 1 `S288 1 . 1 0 `S291 1 . 1 0 ]
-[v _CCP2CONbits CCP2CONbits `VES298  1 e 1 @4026 ]
+[u S621 . 1 `S611 1 . 1 0 `S614 1 . 1 0 ]
+[v _CCP2CONbits CCP2CONbits `VES621  1 e 1 @4026 ]
 "5228
 [v _CCPR2L CCPR2L `VEuc  1 e 1 @4027 ]
-[s S263 . 1 `uc 1 CCP1M 1 0 :4:0 
+[s S586 . 1 `uc 1 CCP1M 1 0 :4:0 
 `uc 1 DC1B 1 0 :2:4 
 ]
 "5261
-[s S266 . 1 `uc 1 CCP1M0 1 0 :1:0 
+[s S589 . 1 `uc 1 CCP1M0 1 0 :1:0 
 `uc 1 CCP1M1 1 0 :1:1 
 `uc 1 CCP1M2 1 0 :1:2 
 `uc 1 CCP1M3 1 0 :1:3 
 `uc 1 DC1B0 1 0 :1:4 
 `uc 1 DC1B1 1 0 :1:5 
 ]
-[u S273 . 1 `S263 1 . 1 0 `S266 1 . 1 0 ]
-[v _CCP1CONbits CCP1CONbits `VES273  1 e 1 @4029 ]
+[u S596 . 1 `S586 1 . 1 0 `S589 1 . 1 0 ]
+[v _CCP1CONbits CCP1CONbits `VES596  1 e 1 @4029 ]
 "5313
 [v _CCPR1L CCPR1L `VEuc  1 e 1 @4030 ]
-[s S21 . 1 `uc 1 PCFG 1 0 :4:0 
+[s S344 . 1 `uc 1 PCFG 1 0 :4:0 
 `uc 1 VCFG 1 0 :2:4 
 ]
 "5423
-[s S24 . 1 `uc 1 PCFG0 1 0 :1:0 
+[s S347 . 1 `uc 1 PCFG0 1 0 :1:0 
 `uc 1 PCFG1 1 0 :1:1 
 `uc 1 PCFG2 1 0 :1:2 
 `uc 1 PCFG3 1 0 :1:3 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
 ]
-[s S31 . 1 `uc 1 . 1 0 :3:0 
+[s S354 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CHSN3 1 0 :1:3 
 `uc 1 VCFG01 1 0 :1:4 
 `uc 1 VCFG11 1 0 :1:5 
 ]
-[u S36 . 1 `S21 1 . 1 0 `S24 1 . 1 0 `S31 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES36  1 e 1 @4033 ]
+[u S359 . 1 `S344 1 . 1 0 `S347 1 . 1 0 `S354 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES359  1 e 1 @4033 ]
 "6017
 [v _T2CON T2CON `VEuc  1 e 1 @4042 ]
-[s S220 . 1 `uc 1 T2CKPS 1 0 :2:0 
+[s S543 . 1 `uc 1 T2CKPS 1 0 :2:0 
 `uc 1 TMR2ON 1 0 :1:2 
 `uc 1 TOUTPS 1 0 :4:3 
 ]
 "6045
-[s S224 . 1 `uc 1 T2CKPS0 1 0 :1:0 
+[s S547 . 1 `uc 1 T2CKPS0 1 0 :1:0 
 `uc 1 T2CKPS1 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 T2OUTPS0 1 0 :1:3 
@@ -335,32 +349,32 @@ DERCIEGO 15
 `uc 1 T2OUTPS2 1 0 :1:5 
 `uc 1 T2OUTPS3 1 0 :1:6 
 ]
-[s S232 . 1 `uc 1 . 1 0 :3:0 
+[s S555 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 TOUTPS0 1 0 :1:3 
 `uc 1 TOUTPS1 1 0 :1:4 
 `uc 1 TOUTPS2 1 0 :1:5 
 `uc 1 TOUTPS3 1 0 :1:6 
 ]
-[u S238 . 1 `S220 1 . 1 0 `S224 1 . 1 0 `S232 1 . 1 0 ]
-[v _T2CONbits T2CONbits `VES238  1 e 1 @4042 ]
+[u S561 . 1 `S543 1 . 1 0 `S547 1 . 1 0 `S555 1 . 1 0 ]
+[v _T2CONbits T2CONbits `VES561  1 e 1 @4042 ]
 "6115
 [v _PR2 PR2 `VEuc  1 e 1 @4043 ]
-[s S315 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+[s S638 . 1 `uc 1 NOT_BOR 1 0 :1:0 
 ]
 "6405
-[s S317 . 1 `uc 1 . 1 0 :1:0 
+[s S640 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_POR 1 0 :1:1 
 ]
-[s S320 . 1 `uc 1 . 1 0 :2:0 
+[s S643 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_PD 1 0 :1:2 
 ]
-[s S323 . 1 `uc 1 . 1 0 :3:0 
+[s S646 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 NOT_TO 1 0 :1:3 
 ]
-[s S326 . 1 `uc 1 . 1 0 :4:0 
+[s S649 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 NOT_RI 1 0 :1:4 
 ]
-[s S329 . 1 `uc 1 nBOR 1 0 :1:0 
+[s S652 . 1 `uc 1 nBOR 1 0 :1:0 
 `uc 1 nPOR 1 0 :1:1 
 `uc 1 nPD 1 0 :1:2 
 `uc 1 nTO 1 0 :1:3 
@@ -369,10 +383,10 @@ DERCIEGO 15
 `uc 1 SBOREN 1 0 :1:6 
 `uc 1 IPEN 1 0 :1:7 
 ]
-[s S338 . 1 `uc 1 . 1 0 :7:0 
+[s S661 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_IPEN 1 0 :1:7 
 ]
-[s S341 . 1 `uc 1 BOR 1 0 :1:0 
+[s S664 . 1 `uc 1 BOR 1 0 :1:0 
 `uc 1 POR 1 0 :1:1 
 `uc 1 PD 1 0 :1:2 
 `uc 1 TO 1 0 :1:3 
@@ -380,11 +394,11 @@ DERCIEGO 15
 `uc 1 . 1 0 :2:5 
 `uc 1 nIPEN 1 0 :1:7 
 ]
-[u S349 . 1 `S315 1 . 1 0 `S317 1 . 1 0 `S320 1 . 1 0 `S323 1 . 1 0 `S326 1 . 1 0 `S329 1 . 1 0 `S338 1 . 1 0 `S341 1 . 1 0 ]
-[v _RCONbits RCONbits `VES349  1 e 1 @4048 ]
+[u S672 . 1 `S638 1 . 1 0 `S640 1 . 1 0 `S643 1 . 1 0 `S646 1 . 1 0 `S649 1 . 1 0 `S652 1 . 1 0 `S661 1 . 1 0 `S664 1 . 1 0 ]
+[v _RCONbits RCONbits `VES672  1 e 1 @4048 ]
 "7230
 [v _INTCON3 INTCON3 `VEuc  1 e 1 @4080 ]
-[s S421 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S744 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -394,7 +408,7 @@ DERCIEGO 15
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "7431
-[s S430 . 1 `uc 1 . 1 0 :1:0 
+[s S753 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -403,53 +417,91 @@ DERCIEGO 15
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S439 . 1 `uc 1 . 1 0 :6:0 
+[s S762 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S443 . 1 `S421 1 . 1 0 `S430 1 . 1 0 `S439 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES443  1 e 1 @4082 ]
+[u S766 . 1 `S744 1 . 1 0 `S753 1 . 1 0 `S762 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES766  1 e 1 @4082 ]
 "8850
 [v _TMR2IF TMR2IF `VEb  1 e 0 @31985 ]
-"305 C:\Users\Ianick\Proyectos\Waffle.X\main.c
+"3 C:\Users\Ianick\Proyectos\Waffle.X\funciones.c
 [v _millisCounter millisCounter `ul  1 e 4 0 ]
-"317
+"4 C:\Users\Ianick\Proyectos\Waffle.X\main.c
+[v _direccion direccion `uc  1 e 1 0 ]
+"5
+[v _estadoMenu estadoMenu `uc  1 s 1 estadoMenu ]
+"328
 [v _main main `(v  1 e 1 0 ]
 {
-"320
+"331
 } 0
-"73
-[v _loop loop `(v  1 e 1 0 ]
+"7
+[v _loop loop `T(v  1 e 1 0 ]
 {
-"74
+"8
 [v loop@m m `ul  1 s 4 m ]
-"75
-[v loop@estado estado `uc  1 s 1 estado ]
-"76
-[v loop@direccion direccion `uc  1 s 1 direccion ]
-"282
+"9
+[v loop@estrategia estrategia `uc  1 s 1 estrategia ]
+"98
 } 0
-"307
+"100
+[v _estrategiaClasica estrategiaClasica `T(v  1 e 1 0 ]
+{
+"101
+[v estrategiaClasica@m m `ul  1 s 4 m ]
+"102
+[v estrategiaClasica@estado estado `uc  1 s 1 estado ]
+"210
+} 0
+"212
+[v _estrategiaCiego estrategiaCiego `T(v  1 e 1 0 ]
+{
+"213
+[v estrategiaCiego@m m `ul  1 s 4 m ]
+"214
+[v estrategiaCiego@estado estado `uc  1 s 1 estado ]
+"260
+} 0
+"295
+[v _estrategiaAtras estrategiaAtras `T(v  1 e 1 0 ]
+{
+"296
+[v estrategiaAtras@m m `ul  1 s 4 m ]
+"297
+[v estrategiaAtras@estado estado `uc  1 s 1 estado ]
+"326
+} 0
+"262
+[v _estrategiaAdelante estrategiaAdelante `T(v  1 e 1 0 ]
+{
+"263
+[v estrategiaAdelante@m m `ul  1 s 4 m ]
+"264
+[v estrategiaAdelante@estado estado `uc  1 s 1 estado ]
+"293
+} 0
+"87 C:\Users\Ianick\Proyectos\Waffle.X\funciones.c
 [v _millis millis `T(ul  1 e 4 0 ]
 {
-"309
+"89
 } 0
-"13
-[v _init init `(v  1 e 1 0 ]
+"5
+[v _init init `T(v  1 e 1 0 ]
 {
-"71
+"64
 } 0
-"284
-[v _setMotores setMotores `(v  1 e 1 0 ]
+"66
+[v _setMotores setMotores `T(v  1 e 1 0 ]
 {
-"294
-[v setMotores@dutyD dutyD `ui  1 a 2 6 ]
-"293
-[v setMotores@dutyI dutyI `ui  1 a 2 4 ]
-"284
-[v setMotores@speedI speedI `i  1 p 2 59 ]
-[v setMotores@speedD speedD `i  1 p 2 61 ]
-"303
+"76
+[v setMotores@dutyD dutyD `ui  1 a 2 14 ]
+"75
+[v setMotores@dutyI dutyI `ui  1 a 2 12 ]
+"66
+[v setMotores@speedI speedI `i  1 p 2 53 ]
+[v setMotores@speedD speedD `i  1 p 2 55 ]
+"85
 } 0
 "28 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwtoft.c
 [v ___lwtoft __lwtoft `(f  1 e 3 0 ]
@@ -461,10 +513,10 @@ DERCIEGO 15
 [v ___fttol __fttol `(l  1 e 4 0 ]
 {
 "47
-[v ___fttol@lval lval `ul  1 a 4 54 ]
+[v ___fttol@lval lval `ul  1 a 4 1 ]
 "46
-[v ___fttol@exp1 exp1 `uc  1 a 1 58 ]
-[v ___fttol@sign1 sign1 `uc  1 a 1 53 ]
+[v ___fttol@exp1 exp1 `uc  1 a 1 5 ]
+[v ___fttol@sign1 sign1 `uc  1 a 1 0 ]
 "44
 [v ___fttol@f1 f1 `f  1 p 3 44 ]
 "73
@@ -491,8 +543,8 @@ DERCIEGO 15
 [v ___ftpack@sign sign `uc  1 p 1 22 ]
 "86
 } 0
-"311 C:\Users\Ianick\Proyectos\Waffle.X\main.c
+"91 C:\Users\Ianick\Proyectos\Waffle.X\funciones.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"315
+"95
 } 0

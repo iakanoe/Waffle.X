@@ -1,81 +1,14 @@
 #include "main.h"
+#include "constants.h"
 
-#define GIROVEL 700
-#define ATAQUEVEL 1000
-#define ATRASVEL -1000
+char direccion = DER;
+static char estadoMenu = MENU;
 
-#define T_ATRAS 300U
-#define T_ESPERA 4970U
-#define T_GIRO_CIEGO 500U
-
-//#define CIEGO // comentar para que no sea ciego
-
-void init(){
-    //Todo digital
-    ADCON1bits.PCFG = 0b1111;
-    
-    //Apagar USB (asi se pueden usar pines RC4 RC5)
-    UCONbits.USBEN = 0;
-    UCFGbits.UTRDIS = 1;
-    
-    //Configurar direccion de pines
-    TRIS_BTN_1 = INPUT; 
-    TRIS_BTN_2 = INPUT;
-    TRIS_LED_R = OUTPUT;
-    TRIS_LED_A = OUTPUT;
-    TRIS_LED_V = OUTPUT;
-    TRIS_IR_1 = INPUT;
-    TRIS_IR_2 = INPUT;
-    TRIS_IR_3 = INPUT;
-//    TRIS_IR_4 = INPUT;
-//    TRIS_IR_5 = INPUT;
-    TRIS_CNY_1 = INPUT;
-    TRIS_CNY_2 = INPUT;
-    TRIS_PWM_D = OUTPUT;
-    TRIS_PWM_I = OUTPUT;
-    TRIS_DIR_D = OUTPUT;
-    TRIS_DIR_I = OUTPUT;
-
-    //Config Timer2 para PWM y millis
-    T2CON = 0;
-    T2CONbits.TOUTPS=11;
-	T2CONbits.T2CKPS=1;
-	PR2=249;
-	T2CONbits.TMR2ON=1;
-    
-    //Config modulos CCP para PWM
-    CCPR1L=0;
-	CCP1CONbits.DC1B=0;
-	CCP1CONbits.CCP1M=12;
-	CCPR2L=0;   
-	CCP2CONbits.DC2B=0;
-	CCP2CONbits.CCP2M=12;
-    
-    //Config interrupciones
-    INTCON3=0;
-	PIE1=0;
-	PIE2=0;
-	RCONbits.IPEN=0;
-	PIE1bits.TMR2IE=1;
-	INTCONbits.PEIE_GIEL=1;
-	INTCONbits.GIE_GIEH=1;
-    RCONbits.IPEN = 0;
-    INTCONbits.PEIE = 1;
-    INTCONbits.GIE = 1;
-    
-    //Aplica estado inicial
-    setMotores(0, 0);
-    LAT_LED_R = 0;
-    LAT_LED_A = 0;
-    LAT_LED_V = 0;
-}
-
-void loop(){
+inline void loop(){
     static unsigned long m = 0;
-    static char estado = MENU;
-    static char direccion = DER;
+    static char estrategia = E_CLASICA;
     
-    switch(estado){
+    switch(estadoMenu){
         case MENU:            
             if(btn(1)){
                 LAT_LED_R = 1;
@@ -83,11 +16,11 @@ void loop(){
                 LAT_LED_V = 1;
                 m = millis();
                 direccion = DER;
-                estado = ESPERA;
+                estadoMenu = ESPERA;
                 while(btn(1))
                     while(btn(2))
-                        estado = LIMPIAR;
-                break;
+                        estadoMenu = LIMPIAR;
+                return;
             }
             
             if(btn(2)){
@@ -96,222 +29,300 @@ void loop(){
                 LAT_LED_V = 1;
                 m = millis();
                 direccion = IZQ;
-                estado = ESPERA;
+                estadoMenu = ESPERA;
                 while(btn(2))
                     while(btn(1))
-                        estado = LIMPIAR;
-                break;
+                        estadoMenu = LIMPIAR;
+                return;
             }
             
             setMotores(0, 0);
             LAT_LED_R = u(ir(1) || ir(2) || cny(1));
             LAT_LED_A = u(ir(3));
             LAT_LED_V = u(ir(4) || ir(5) || cny(2));
-            break;
+            return;
             
         case LIMPIAR:
             if(btn(1) || btn(2)){
-                estado = MENU;
+                estadoMenu = MENU;
                 while(btn(1) || btn(2));
-                break;
+                return;
             }
             
             LAT_LED_R = 1;
             LAT_LED_A = 0;
             LAT_LED_V = 1;
             setMotores(1000, 1000);
-            break;
+            return;
             
         case ESPERA:
             if(millis() > (m + T_ESPERA)){
-                estado = ANALISIS;
+#ifdef CIEGO
+                estadoMenu = E_CIEGO;
+#else
+                estadoMenu = estrategia;
+#endif
                 LAT_LED_R = 0;
                 LAT_LED_A = 0;
                 LAT_LED_V = 1;
-                break;
+                return;
+            }
+            
+            if(sw()){
+                if(direccion == DER) estrategia = E_ADELANTE;
+                else estrategia = E_ATRAS;
             }
             
             setMotores(0, 0);
             LAT_LED_R = 1;
             LAT_LED_A = u(millis() > (m + (T_ESPERA / 2)));
             LAT_LED_V = 0;
-            break;
+            return;
             
+        case E_CLASICA:
+            estrategiaClasica();
+            return;
+            
+        case E_CIEGO:
+            estrategiaCiego();
+            return;
+            
+        case E_ADELANTE:
+            estrategiaAdelante();
+            return;
+            
+        case E_ATRAS:
+            estrategiaAtras();
+            return;
+    }
+}
+
+inline void estrategiaClasica(){
+    static unsigned long m = 0;
+    static char estado = ANALISIS;
+    
+    switch(estado){
         case ANALISIS:
             if(cny(1) || cny(2)){
                 estado = ATRAS;
                 m = millis();
-                break;
+                return;
             }
-            
-#ifdef CIEGO
-                estado = ATAQUE;
-                break;
-#else
-            
+                        
             if(ir(3)){
-                if(ir(2) == ir(4)){
-                    estado = ATAQUE;
-                    break;
-                }
-                
                 if(ir(2)){
+                    if(ir(4)){
+                        estado = ATAQUE;
+                        return;
+                    }
+                    
                     estado = IZQAV;
-                    break;
+                    return;
                 }
                 
                 if(ir(4)){
+                    if(ir(2)){
+                        estado = ATAQUE;
+                        return;
+                    }
+                    
                     estado = DERAV;
-                    break;
+                    return;
                 }
+                
+                estado = ATAQUE;
+                return;
             }
             
             if(ir(2)){
                 estado = IZQA;
-                break;
+                return;
             }
             
             if(ir(4)){
                 estado = DERA;
-                break;
+                return;
             }
             
             if(ir(1)){
                 estado = IZQ;
-                break;
+                return;
             }
             
             if(ir(5)){
                 estado = DER;
-                break;
+                return;
             }
             
             estado = direccion;
-                
-            //estado = direccion == DER ? DERB : (direccion == IZQ ? IZQB : DER);
-            break;
-#endif
+            return;
             
         case ATAQUE:
-            setMotores(ATAQUEVEL, ATAQUEVEL);
+            setMotores(V_ATAQUE, V_ATAQUE);
             estado = ANALISIS;
-            break;
+            return;
             
         case DERAV:
-            setMotores(ATAQUEVEL, ATAQUEVEL / 2);
+            setMotores(V_ATAQUE, V_ATAQUE / 2);
             direccion = DER;
             estado = ANALISIS;
-            break;
+            return;
             
         case IZQAV:
-            setMotores(ATAQUEVEL / 2, ATAQUEVEL);
+            setMotores(V_ATAQUE / 2, V_ATAQUE);
             direccion = IZQ;
             estado = ANALISIS;
-            break;
+            return;
             
         case ATRAS:
             if(millis() > (m + T_ATRAS)){
-                estado = ANALISIS;
-                
-                #ifdef CIEGO
-                    estado = DERCIEGO;
-                    m = millis();
-                #endif
-                    
-                break;
+                estado = ANALISIS;                    
+                return;
             }
             
-            setMotores(ATRASVEL, ATRASVEL);
-            break;
+            setMotores(V_ATRAS, V_ATRAS);
+            return;
             
         case IZQA:
-            setMotores(0, ATAQUEVEL);
+            setMotores(0, V_ATAQUE);
             direccion = IZQ;
             estado = ANALISIS;
-            break;
+            return;
             
         case DERA:
-            setMotores(ATAQUEVEL, 0);
+            setMotores(V_ATAQUE, 0);
             direccion = DER;
             estado = ANALISIS;
-            break;
+            return;
             
         case IZQ:
-            setMotores(-GIROVEL, GIROVEL);
+            setMotores(-V_GIRO, V_GIRO);
             direccion = IZQ;
             estado = ANALISIS;
-            break;
+            return;
             
         case DER:
-            setMotores(GIROVEL, -GIROVEL);
+            setMotores(V_GIRO, -V_GIRO);
             direccion = DER;
             estado = ANALISIS;
-            break;
-            
-        case IZQB:
-            setMotores(0, GIROVEL);
-            direccion = IZQ;
-            estado = ANALISIS;
-            break;
-            
-        case DERB:
-            setMotores(GIROVEL, 0);
-            direccion = DER;
-            estado = ANALISIS;
-            break;
-            
-        case DERCIEGO:
-            if(millis() > (m + T_GIRO_CIEGO)){
-                estado = ANALISIS;
-                break;
-            }
-            
-            setMotores(GIROVEL, -GIROVEL);
-            break;
-            
-        case TEST_CNY:
-            LAT_LED_R = u!PORT_CNY_1;
-            LAT_LED_V = u!PORT_CNY_2;
-            LAT_LED_A = 1;
-            if(btn(1) || btn(2)){
-                while(btn(1) || btn(2));
-                estado = 0;
-            }
-            break;
+            return;
     }
 }
 
-void setMotores(int speedI, int speedD){
-    speedD = -speedD;
+inline void estrategiaCiego(){
+    static unsigned long m = 0;
+    static char estado = ANALISIS;
     
-    speedI = limitar(speedI, -1000, 1000);
-    speedD = limitar(speedD, -1000, 1000);
-    
-    LAT_DIR_I = u(speedI < 0);
-    LAT_DIR_D = u(speedD < 0);
-    
-    unsigned int dutyI = u(speedI < 0 ? 1000+speedI : speedI);
-    unsigned int dutyD = u(speedD < 0 ? 1000+speedD : speedD);
-    
-    dutyI *= 1.023;
-    dutyD *= 1.023;
-    
-    CCPR1L = dutyI / 4;
-    CCPR2L = dutyD / 4;
-    CCP1CONbits.DC1B = dutyI % 4;
-    CCP2CONbits.DC2B = dutyD % 4;
+    switch(estado){
+        case ANALISIS:
+            if(cny(1) || cny(2)){
+                estado = ATRAS;
+                m = millis();
+                return;
+            }
+            
+            estado = ATAQUE;
+            return;
+            
+        case ATAQUE:
+            setMotores(V_ATAQUE, V_ATAQUE);
+            estado = ANALISIS;
+            return;
+            
+        case ATRAS:
+            if(millis() > (m + T_ATRAS)){
+                estado = direccion;
+                m = millis();                    
+                return;
+            }
+            
+            setMotores(V_ATRAS, V_ATRAS);
+            return;
+
+        case DER:
+            if(millis() > (m + T_GIRO_CIEGO)){
+                estado = ANALISIS;
+                return;
+            }
+            
+            setMotores(V_GIRO, -V_GIRO);
+            return;
+            
+        case IZQ:
+            if(millis() > (m + T_GIRO_CIEGO)){
+                estado = ANALISIS;
+                return;
+            }
+            
+            setMotores(-V_GIRO, V_GIRO);
+            return;
+    }
 }
 
-unsigned long millisCounter = 0;
-
-inline unsigned long millis(){
-    return millisCounter;
+inline void estrategiaAdelante(){
+    static unsigned long m = 0;
+    static char estado = POSICIONAR;
+    
+    if(ir(1) || ir(2) || ir(3) || ir(4) || ir(5) || cny(1) || cny(2)){
+        estadoMenu = E_CLASICA;
+        return;
+    }
+    
+    if(millis() < m)
+        return;
+    
+    switch(estado){
+        case POSICIONAR:
+            setMotores(V_POSICIONAR, 0);
+            m = millis() + T_POSICIONAR_ADELANTE;
+            estado = AVANZAR;
+            return;
+            
+        case AVANZAR:
+            setMotores(V_AVANZAR, V_AVANZAR);
+            m = millis() + T_AVANZAR;
+            estado = FRENAR;
+            return;
+            
+        case FRENAR:
+            setMotores(0, 0);
+            m = millis() + T_FRENAR;
+            estado = AVANZAR;
+            return;
+    }
 }
 
-void interrupt ISR(void){
-    if(!TMR2IF) return;
-    TMR2IF = 0;
-    millisCounter++;
+inline void estrategiaAtras(){
+    static unsigned long m = 0;
+    static char estado = POSICIONAR;
+    
+    if(ir(1) || ir(2) || ir(3) || ir(4) || ir(5) || cny(1) || cny(2)){
+        estadoMenu = E_CLASICA;
+        return;
+    }
+    
+    if(millis() < m)
+        return;
+    
+    switch(estado){
+        case POSICIONAR:
+            setMotores(0, -V_POSICIONAR);
+            m = millis() + T_POSICIONAR_ATRAS;
+            estado = AVANZAR;
+            return;
+            
+        case AVANZAR:
+            setMotores(V_AVANZAR, V_AVANZAR);
+            m = millis() + T_AVANZAR;
+            estado = FRENAR;
+            return;
+            
+        case FRENAR:
+            setMotores(0, 0);
+            m = millis() + T_FRENAR;
+            estado = AVANZAR;
+            return;
+    }
 }
 
 void main(){
