@@ -59,6 +59,7 @@ inline void loop(){
             if(millis() > (m + T_ESPERA)){
 #ifdef CIEGO
                 estadoMenu = E_CIEGO;
+                setMotores(V_ATAQUE, V_ATAQUE);
 #else
                 estadoMenu = estrategia;
 #endif
@@ -69,8 +70,12 @@ inline void loop(){
             }
             
             if(sw()){
-                if(direccion == DER) estrategia = E_ADELANTE;
-                else estrategia = E_ATRAS;
+                if(direccion == DER)
+                    estrategia = E_ADELANTE;
+                else if(direccion == IZQ)
+                    estrategia = E_ATRAS;
+                else
+                    estrategia = E_CIEGO;
             }
             
             setMotores(0, 0);
@@ -99,7 +104,13 @@ inline void loop(){
 
 inline void estrategiaClasica(){
     static unsigned long m = 0;
+    static char firstTime = 1;
     static char estado = ANALISIS;
+    
+    if(firstTime){
+        m = millis() - 1;
+        firstTime = 0;
+    }
     
     switch(estado){
         case ANALISIS:
@@ -146,11 +157,13 @@ inline void estrategiaClasica(){
             
             if(ir(1)){
                 estado = IZQ;
+                m = millis();
                 return;
             }
             
             if(ir(5)){
                 estado = DER;
+                m = millis();
                 return;
             }
             
@@ -165,12 +178,14 @@ inline void estrategiaClasica(){
         case DERAV:
             setMotores(V_ATAQUE, V_ATAQUE / 2);
             direccion = DER;
+            m = millis();
             estado = ANALISIS;
             return;
             
         case IZQAV:
             setMotores(V_ATAQUE / 2, V_ATAQUE);
             direccion = IZQ;
+            m = millis();
             estado = ANALISIS;
             return;
             
@@ -186,24 +201,48 @@ inline void estrategiaClasica(){
         case IZQA:
             setMotores(0, V_ATAQUE);
             direccion = IZQ;
+            m = millis();
             estado = ANALISIS;
             return;
             
         case DERA:
             setMotores(V_ATAQUE, 0);
             direccion = DER;
+            m = millis();
             estado = ANALISIS;
             return;
             
         case IZQ:
+            if(millis() > (m + T_GIRO)){
+                direccion = BUSCA_IZQ;
+                estado = ANALISIS;
+                return;
+            }
+            
             setMotores(-V_GIRO, V_GIRO);
             direccion = IZQ;
             estado = ANALISIS;
             return;
             
         case DER:
+            if(millis() > (m + T_GIRO)){
+                direccion = BUSCA_DER;
+                estado = ANALISIS;
+                return;
+            }
+            
             setMotores(V_GIRO, -V_GIRO);
             direccion = DER;
+            estado = ANALISIS;
+            return;
+            
+        case BUSCA_DER:
+            setMotores(V_BUSCA, -V_BUSCA);
+            estado = ANALISIS;
+            return;
+            
+        case BUSCA_IZQ:
+            setMotores(-V_BUSCA, V_BUSCA);
             estado = ANALISIS;
             return;
     }
@@ -211,50 +250,28 @@ inline void estrategiaClasica(){
 
 inline void estrategiaCiego(){
     static unsigned long m = 0;
-    static char estado = ANALISIS;
+    static char estado = AVANZAR;
     
-    switch(estado){
-        case ANALISIS:
-            if(cny(1) || cny(2)){
-                estado = ATRAS;
-                m = millis();
-                return;
-            }
-            
-            estado = ATAQUE;
-            return;
-            
-        case ATAQUE:
-            setMotores(V_ATAQUE, V_ATAQUE);
-            estado = ANALISIS;
+    switch(estado){            
+        case AVANZAR:
+            if(!cny(1) && !cny(2)) return;
+            estado = ATRAS;
+            m = millis() + T_ATRAS;
+            setMotores(V_ATRAS, V_ATRAS);
             return;
             
         case ATRAS:
-            if(millis() > (m + T_ATRAS)){
-                estado = direccion;
-                m = millis();                    
-                return;
-            }
-            
-            setMotores(V_ATRAS, V_ATRAS);
-            return;
-
-        case DER:
-            if(millis() > (m + T_GIRO_CIEGO)){
-                estado = ANALISIS;
-                return;
-            }
-            
-            setMotores(V_GIRO, -V_GIRO);
+            if(millis() < m) return;
+            if(direccion == DER) setMotores(V_GIRO, -V_GIRO);
+            else setMotores(-V_GIRO, V_GIRO);
+            estado = GIRO;
+            m = millis() + T_GIRO_CIEGO;                    
             return;
             
-        case IZQ:
-            if(millis() > (m + T_GIRO_CIEGO)){
-                estado = ANALISIS;
-                return;
-            }
-            
-            setMotores(-V_GIRO, V_GIRO);
+        case GIRO:
+            if(millis() < m) return;
+            estado = AVANZAR;
+            setMotores(V_ATAQUE, V_ATAQUE);
             return;
     }
 }

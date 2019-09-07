@@ -4315,10 +4315,13 @@ DERAV,
 IZQ,
 IZQA,
 IZQAV,
+BUSCA_DER,
+BUSCA_IZQ,
 ATRAS,
 POSICIONAR,
 AVANZAR,
-FRENAR
+FRENAR,
+GIRO
 };
 
 # 4 "main.c"
@@ -4381,6 +4384,7 @@ if(millis() > (m + 4970U)){
 
 
 
+
 estadoMenu = estrategia;
 
 LATAbits.LA2 = 0;
@@ -4390,8 +4394,12 @@ return;
 }
 
 if((unsigned)!PORTCbits.RC7){
-if(direccion == DER) estrategia = E_ADELANTE;
-else estrategia = E_ATRAS;
+if(direccion == DER)
+estrategia = E_ADELANTE;
+else if(direccion == IZQ)
+estrategia = E_ATRAS;
+else
+estrategia = E_CIEGO;
 }
 
 setMotores(0, 0);
@@ -4420,7 +4428,13 @@ return;
 
 inline void estrategiaClasica(){
 static unsigned long m = 0;
+static char firstTime = 1;
 static char estado = ANALISIS;
+
+if(firstTime){
+m = millis() - 1;
+firstTime = 0;
+}
 
 switch(estado){
 case ANALISIS:
@@ -4467,11 +4481,13 @@ return;
 
 if((unsigned)!PORTBbits.RB5){
 estado = IZQ;
+m = millis();
 return;
 }
 
 if((unsigned)!PORTCbits.RC4){
 estado = DER;
+m = millis();
 return;
 }
 
@@ -4486,12 +4502,14 @@ return;
 case DERAV:
 setMotores(1000, 1000 / 2);
 direccion = DER;
+m = millis();
 estado = ANALISIS;
 return;
 
 case IZQAV:
 setMotores(1000 / 2, 1000);
 direccion = IZQ;
+m = millis();
 estado = ANALISIS;
 return;
 
@@ -4507,24 +4525,48 @@ return;
 case IZQA:
 setMotores(0, 1000);
 direccion = IZQ;
+m = millis();
 estado = ANALISIS;
 return;
 
 case DERA:
 setMotores(1000, 0);
 direccion = DER;
+m = millis();
 estado = ANALISIS;
 return;
 
 case IZQ:
-setMotores(-700, 700);
+if(millis() > (m + 500U)){
+direccion = BUSCA_IZQ;
+estado = ANALISIS;
+return;
+}
+
+setMotores(-1000, 1000);
 direccion = IZQ;
 estado = ANALISIS;
 return;
 
 case DER:
-setMotores(700, -700);
+if(millis() > (m + 500U)){
+direccion = BUSCA_DER;
+estado = ANALISIS;
+return;
+}
+
+setMotores(1000, -1000);
 direccion = DER;
+estado = ANALISIS;
+return;
+
+case BUSCA_DER:
+setMotores(700, -700);
+estado = ANALISIS;
+return;
+
+case BUSCA_IZQ:
+setMotores(-700, 700);
 estado = ANALISIS;
 return;
 }
@@ -4532,50 +4574,28 @@ return;
 
 inline void estrategiaCiego(){
 static unsigned long m = 0;
-static char estado = ANALISIS;
+static char estado = AVANZAR;
 
 switch(estado){
-case ANALISIS:
-if((unsigned)!PORTBbits.RB3 || (unsigned)!PORTCbits.RC6){
+case AVANZAR:
+if(!(unsigned)!PORTBbits.RB3 && !(unsigned)!PORTCbits.RC6) return;
 estado = ATRAS;
-m = millis();
-return;
-}
-
-estado = ATAQUE;
-return;
-
-case ATAQUE:
-setMotores(1000, 1000);
-estado = ANALISIS;
-return;
-
-case ATRAS:
-if(millis() > (m + 300U)){
-estado = direccion;
-m = millis();
-return;
-}
-
+m = millis() + 300U;
 setMotores(-1000, -1000);
 return;
 
-case DER:
-if(millis() > (m + 500U)){
-estado = ANALISIS;
+case ATRAS:
+if(millis() < m) return;
+if(direccion == DER) setMotores(1000, -1000);
+else setMotores(-1000, 1000);
+estado = GIRO;
+m = millis() + 500U;
 return;
-}
 
-setMotores(700, -700);
-return;
-
-case IZQ:
-if(millis() > (m + 500U)){
-estado = ANALISIS;
-return;
-}
-
-setMotores(-700, 700);
+case GIRO:
+if(millis() < m) return;
+estado = AVANZAR;
+setMotores(1000, 1000);
 return;
 }
 }

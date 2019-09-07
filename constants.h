@@ -2,7 +2,9 @@
 
 #define T_ESPERA 4970U
 
-#define V_GIRO 700
+#define V_GIRO 1000
+#define T_GIRO 500U
+#define V_BUSCA 700
 #define V_ATAQUE 1000
 #define V_ATRAS -1000
 #define T_ATRAS 300U

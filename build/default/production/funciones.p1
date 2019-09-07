@@ -3382,11 +3382,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.h: 101: IZQ,
 [; ;main.h: 102: IZQA,
 [; ;main.h: 103: IZQAV,
-[; ;main.h: 104: ATRAS,
-[; ;main.h: 105: POSICIONAR,
-[; ;main.h: 106: AVANZAR,
-[; ;main.h: 107: FRENAR
-[; ;main.h: 108: };
+[; ;main.h: 104: BUSCA_DER,
+[; ;main.h: 105: BUSCA_IZQ,
+[; ;main.h: 106: ATRAS,
+[; ;main.h: 107: POSICIONAR,
+[; ;main.h: 108: AVANZAR,
+[; ;main.h: 109: FRENAR,
+[; ;main.h: 110: GIRO
+[; ;main.h: 111: };
 "3 funciones.c
 [v _millisCounter `ul ~T0 @X0 1 e ]
 [i _millisCounter
@@ -3602,9 +3605,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 324 ]
 }
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-[v F3379 `(v ~T0 @X0 1 tf ]
+[v F3382 `(v ~T0 @X0 1 tf ]
 "91
-[v _ISR `IF3379 ~T0 @X0 1 e ]
+[v _ISR `IF3382 ~T0 @X0 1 e ]
 {
 [; ;funciones.c: 91: void interrupt ISR(void){
 [e :U _ISR ]

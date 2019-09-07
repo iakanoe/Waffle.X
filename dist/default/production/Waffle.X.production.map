@@ -5,9 +5,9 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v1.45\dat\en_msgs.txt -cs \
   -h+dist/default/production\Waffle.X.production.sym \
   --cmf=dist/default/production\Waffle.X.production.cmf -z -Q18F2550 \
-  -oC:\Users\Ianick\AppData\Local\Temp\s2l0.2 \
+  -oC:\Users\Ianick\AppData\Local\Temp\s8t4.2 \
   -Mdist/default/production/Waffle.X.production.map -E1 -ver=XC8 \
-  -ASTACK=087h-07ffh -pstack=STACK -ACODE=00h-07FFFh -ACONST=00h-07FFFh \
+  -ASTACK=089h-07ffh -pstack=STACK -ACODE=00h-07FFFh -ACONST=00h-07FFFh \
   -ASMALLCONST=0800h-08FFhx120 -AMEDIUMCONST=0800h-07FFFh -ACOMRAM=01h-05Fh \
   -AABS1=00h-07FFh -ABIGRAM=01h-07FFh -ARAM=060h-0FFh,0100h-01FFhx7 \
   -ABANK0=060h-0FFh -ABANK1=0100h-01FFh -ABANK2=0200h-02FFh \
@@ -22,7 +22,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Ianick\AppData\Local\Temp\s2l0.obj \
+  C:\Users\Ianick\AppData\Local\Temp\s8t4.obj \
   dist/default/production\Waffle.X.production.obj 
 
 Object code version is 3.11
@@ -35,35 +35,35 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Ianick\AppData\Local\Temp\s2l0.obj
+C:\Users\Ianick\AppData\Local\Temp\s8t4.obj
                 init                                  E        E        4        4       0
                 reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
                 config                           300000   300000        E   300000       0
 dist/default/production\Waffle.X.production.obj
                 intcode                               8        8        6        4       0
-                temp                                 4D       4D        1        1       1
-                intcode_body                        BBA      BBA       AA        4       0
-                text12                              B0C      B0C       AE        4       0
-                text11                              A18      A18       F4        4       0
-                text10                              734      734       F8        4       0
-                text9                               D44      D44       24        4       0
-                text8                               3FA      3FA      1D6        4       0
-                text7                               C64      C64       9A        4       0
-                text6                               D68      D68       12        4       0
-                text5                               922      922       F6        4       0
-                text4                               82C      82C       F6        4       0
-                text3                               5D0      5D0      164        4       0
-                text2                               220      220      1DA        4       0
-                text1                                12       12      20E        4       0
-                text0                               D7A      D7A        A        4       0
-                cstackCOMRAM                          1        1       39        1       1
-                cstackBANK0                          60       60       1B       60       1
-                bssBANK0                             7B       7B        C       60       1
-                dataCOMRAM                           49       49        4        1       1
-                bssCOMRAM                            3A       3A        F        1       1
-                cinit                               CFE      CFE       46        4       0
-                idataCOMRAM                         D84      D84        4        4       0
+                temp                                 4C       4C        1        1       1
+                intcode_body                        CC0      CC0       AA        4       0
+                text12                              C12      C12       AE        4       0
+                text11                              B1E      B1E       F4        4       0
+                text10                              A2A      A2A       F4        4       0
+                text9                               E4C      E4C       24        4       0
+                text8                               56E      56E      1D2        4       0
+                text7                               D6A      D6A       9C        4       0
+                text6                               E70      E70       12        4       0
+                text5                               934      934       F6        4       0
+                text4                               83E      83E       F6        4       0
+                text3                               740      740       FE        4       0
+                text2                                12       12      33E        4       0
+                text1                               350      350      21E        4       0
+                text0                               E82      E82        A        4       0
+                cstackCOMRAM                          1        1       3B        1       1
+                cstackBANK0                          60       60       19       60       1
+                bssBANK0                             79       79       10       60       1
+                dataCOMRAM                           46       46        6        1       1
+                bssCOMRAM                            3C       3C        A        1       1
+                cinit                               E06      E06       46        4       0
+                idataCOMRAM                         E8C      E8C        6        4       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -72,22 +72,22 @@ TOTAL           Name                               Link     Load   Length     Sp
                 intcode                               8        8        6         0
                 init                                  E        E        4         0
                 reset_vec                             0        0        4         0
-                intcode_body                        BBA      BBA       AA         0
-                text12                              B0C      B0C       AE         0
-                text11                              A18      A18       F4         0
-                text10                              734      734       F8         0
-                text9                               D44      D44       24         0
-                text8                               3FA      3FA      1D6         0
-                text7                               C64      C64       9A         0
-                text6                               D68      D68       12         0
-                text5                               922      922       F6         0
-                text4                               82C      82C       F6         0
-                text3                               5D0      5D0      164         0
-                text2                               220      220      1DA         0
-                text1                                12       12      20E         0
-                text0                               D7A      D7A        A         0
-                cinit                               CFE      CFE       46         0
-                idataCOMRAM                         D84      D84        4         0
+                intcode_body                        CC0      CC0       AA         0
+                text12                              C12      C12       AE         0
+                text11                              B1E      B1E       F4         0
+                text10                              A2A      A2A       F4         0
+                text9                               E4C      E4C       24         0
+                text8                               56E      56E      1D2         0
+                text7                               D6A      D6A       9C         0
+                text6                               E70      E70       12         0
+                text5                               934      934       F6         0
+                text4                               83E      83E       F6         0
+                text3                               740      740       FE         0
+                text2                                12       12      33E         0
+                text1                               350      350      21E         0
+                text0                               E82      E82        A         0
+                cinit                               E06      E06       46         0
+                idataCOMRAM                         E8C      E8C        6         0
 
         CLASS   CONST          
 
@@ -96,10 +96,10 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   MEDIUMCONST    
 
         CLASS   COMRAM         
-                temp                                 4D       4D        1         1
-                cstackCOMRAM                          1        1       39         1
-                dataCOMRAM                           49       49        4         1
-                bssCOMRAM                            3A       3A        F         1
+                temp                                 4C       4C        1         1
+                cstackCOMRAM                          1        1       3B         1
+                dataCOMRAM                           46       46        6         1
+                bssCOMRAM                            3C       3C        A         1
 
         CLASS   ABS1           
 
@@ -108,8 +108,8 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   RAM            
 
         CLASS   BANK0          
-                cstackBANK0                          60       60       1B         1
-                bssBANK0                             7B       7B        C         1
+                cstackBANK0                          60       60       19         1
+                bssBANK0                             79       79       10         1
 
         CLASS   BANK1          
 
@@ -142,9 +142,9 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
                 reset_vec                      000000  000004  000004         0       0  CODE    
-                cstackCOMRAM                   000001  00004D  00004E         1       1  COMRAM  
-                intcode                        000008  000D80  000D88         4       0  CODE    
-                cstackBANK0                    000060  000027  000087        60       1  BANK0   
+                cstackCOMRAM                   000001  00004C  00004D         1       1  COMRAM  
+                intcode                        000008  000E8A  000E92         4       0  CODE    
+                cstackBANK0                    000060  000029  000089        60       1  BANK0   
                 idloc                          200000  000008  200008    200000       0  IDLOC   
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
@@ -152,7 +152,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
-        BANK0            000087-0000FF               79
+        BANK0            000089-0000FF               77
         BANK1            000100-0001FF              100
         BANK2            000200-0002FF              100
         BANK3            000300-0003FF              100
@@ -160,19 +160,19 @@ UNUSED ADDRESS RANGES
         BANK5            000500-0005FF              100
         BANK6            000600-0006FF              100
         BANK7            000700-0007FF              100
-        BIGRAM           00004E-00005F               12
-                         000087-0007FF              779
+        BIGRAM           00004D-00005F               13
+                         000089-0007FF              777
         CODE             000004-000007                4
-                         000D88-007FFF             7278
-        COMRAM           00004E-00005F               12
+                         000E92-007FFF             716E
+        COMRAM           00004D-00005F               13
         CONST            000004-000007                4
-                         000D88-007FFF             7278
+                         000E92-007FFF             716E
         EEDATA           F00000-F000FF              100
-        MEDIUMCONST      000D88-007FFF             7278
-        RAM              000087-0007FF              100
+        MEDIUMCONST      000E92-007FFF             716E
+        RAM              000089-0007FF              100
         SFR              000F60-000FFF               A0
-        SMALLCONST       000D88-007FFF              100
-        STACK            000087-0007FF              779
+        SMALLCONST       000E92-007FFF              100
+        STACK            000089-0007FF              777
 
                                   Symbol Table
 
@@ -301,11 +301,11 @@ __Hrparam                    rparam       000000
 __Hsfr                       sfr          000000
 __Hsmallconst                smallconst   000000
 __Hspace_0                   (abs)        30000E
-__Hspace_1                   (abs)        000087
+__Hspace_1                   (abs)        000089
 __Hspace_2                   (abs)        000000
 __Hstack                     stack        000000
 __Hstruct                    struct       000000
-__Htemp                      temp         00004E
+__Htemp                      temp         00004D
 __Htext                      text         000000
 __Htext0                     text0        000000
 __Htext1                     text1        000000
@@ -381,7 +381,7 @@ __Lspace_1                   (abs)        000000
 __Lspace_2                   (abs)        000000
 __Lstack                     stack        000000
 __Lstruct                    struct       000000
-__Ltemp                      temp         00004D
+__Ltemp                      temp         00004C
 __Ltext                      text         000000
 __Ltext0                     text0        000000
 __Ltext1                     text1        000000
@@ -397,72 +397,72 @@ __Ltext7                     text7        000000
 __Ltext8                     text8        000000
 __Ltext9                     text9        000000
 __S0                         (abs)        30000E
-__S1                         (abs)        000087
+__S1                         (abs)        000089
 __S2                         (abs)        000000
-___ftmul                     text11       000A18
+___ftmul                     text11       000B1E
 ___ftmul@cntr                cstackCOMRAM 00002B
 ___ftmul@exp                 cstackCOMRAM 000027
 ___ftmul@f1                  cstackCOMRAM 00001E
 ___ftmul@f2                  cstackCOMRAM 000021
 ___ftmul@f3_as_product       cstackCOMRAM 000028
 ___ftmul@sign                cstackCOMRAM 00002C
-___ftpack                    text12       000B0C
+___ftpack                    text12       000C12
 ___ftpack@arg                cstackCOMRAM 000013
 ___ftpack@exp                cstackCOMRAM 000016
 ___ftpack@sign               cstackCOMRAM 000017
-___fttol                     text10       000734
-___fttol@exp1                cstackBANK0  000065
+___fttol                     text10       000A2A
+___fttol@exp1                cstackCOMRAM 00003B
 ___fttol@f1                  cstackCOMRAM 00002D
-___fttol@lval                cstackBANK0  000061
-___fttol@sign1               cstackBANK0  000060
+___fttol@lval                cstackCOMRAM 000037
+___fttol@sign1               cstackCOMRAM 000036
 ___inthi_sp                  stack        000000
 ___intlo_sp                  stack        000000
-___lwtoft                    text9        000D44
+___lwtoft                    text9        000E4C
 ___lwtoft@c                  cstackCOMRAM 00001B
 ___param_bank                (abs)        000000
 ___rparam_used               (abs)        000001
 ___sp                        stack        000000
 __accesstop                  (abs)        000060
 __activetblptr               (abs)        000002
-__end_of_ISR                 intcode_body 000C64
-__end_of___ftmul             text11       000B0C
-__end_of___ftpack            text12       000BBA
-__end_of___fttol             text10       00082C
-__end_of___lwtoft            text9        000D68
-__end_of__initialization     cinit        000D36
-__end_of_estrategiaAdelante  text5        000A18
-__end_of_estrategiaAtras     text4        000922
-__end_of_estrategiaCiego     text3        000734
-__end_of_estrategiaClasica   text2        0003FA
-__end_of_init                text7        000CFE
-__end_of_loop                text1        000220
-__end_of_main                text0        000D84
-__end_of_millis              text6        000D7A
-__end_of_setMotores          text8        0005D0
-__initialization             cinit        000CFE
+__end_of_ISR                 intcode_body 000D6A
+__end_of___ftmul             text11       000C12
+__end_of___ftpack            text12       000CC0
+__end_of___fttol             text10       000B1E
+__end_of___lwtoft            text9        000E70
+__end_of__initialization     cinit        000E3E
+__end_of_estrategiaAdelante  text5        000A2A
+__end_of_estrategiaAtras     text4        000934
+__end_of_estrategiaCiego     text3        00083E
+__end_of_estrategiaClasica   text2        000350
+__end_of_init                text7        000E06
+__end_of_loop                text1        00056E
+__end_of_main                text0        000E8C
+__end_of_millis              text6        000E82
+__end_of_setMotores          text8        000740
+__initialization             cinit        000E06
 __mediumconst                mediumconst  000000
-__pbssBANK0                  bssBANK0     00007B
-__pbssCOMRAM                 bssCOMRAM    00003A
-__pcinit                     cinit        000CFE
+__pbssBANK0                  bssBANK0     000079
+__pbssCOMRAM                 bssCOMRAM    00003C
+__pcinit                     cinit        000E06
 __pcstackBANK0               cstackBANK0  000060
 __pcstackCOMRAM              cstackCOMRAM 000001
-__pdataCOMRAM                dataCOMRAM   000049
-__pidataCOMRAM               idataCOMRAM  000D84
+__pdataCOMRAM                dataCOMRAM   000046
+__pidataCOMRAM               idataCOMRAM  000E8C
 __pintcode                   intcode      000008
-__pintcode_body              intcode_body 000BBA
-__ptext0                     text0        000D7A
-__ptext1                     text1        000012
-__ptext10                    text10       000734
-__ptext11                    text11       000A18
-__ptext12                    text12       000B0C
-__ptext2                     text2        000220
-__ptext3                     text3        0005D0
-__ptext4                     text4        00082C
-__ptext5                     text5        000922
-__ptext6                     text6        000D68
-__ptext7                     text7        000C64
-__ptext8                     text8        0003FA
-__ptext9                     text9        000D44
+__pintcode_body              intcode_body 000CC0
+__ptext0                     text0        000E82
+__ptext1                     text1        000350
+__ptext10                    text10       000A2A
+__ptext11                    text11       000B1E
+__ptext12                    text12       000C12
+__ptext2                     text2        000012
+__ptext3                     text3        000740
+__ptext4                     text4        00083E
+__ptext5                     text5        000934
+__ptext6                     text6        000E70
+__ptext7                     text7        000D6A
+__ptext8                     text8        00056E
+__ptext9                     text9        000E4C
 __ramtop                     ramtop       000800
 __size_of_ISR                (abs)        000000
 __size_of___ftmul            (abs)        000000
@@ -479,56 +479,57 @@ __size_of_main               (abs)        000000
 __size_of_millis             (abs)        000000
 __size_of_setMotores         (abs)        000000
 __smallconst                 smallconst   000000
-_direccion                   dataCOMRAM   00004C
-_estadoMenu                  bssCOMRAM    000048
-_estrategiaAdelante          text5        000922
-_estrategiaAtras             text4        00082C
-_estrategiaCiego             text3        0005D0
-_estrategiaClasica           text2        000220
-_init                        text7        000C64
-_loop                        text1        000012
-_loop$316                    cstackBANK0  000079
-_loop$325                    cstackBANK0  00007A
-_main                        text0        000D7A
-_millis                      text6        000D68
-_millisCounter               bssBANK0     00007B
-_setMotores                  text8        0003FA
-_setMotores$929              cstackBANK0  000068
-_setMotores$930              cstackBANK0  00006A
-btemp                        temp         00004D
-end_of_initialization        cinit        000D36
-estrategiaAdelante@estado    dataCOMRAM   00004A
-estrategiaAdelante@m         bssBANK0     000083
-estrategiaAtras@estado       dataCOMRAM   000049
-estrategiaAtras@m            bssBANK0     00007F
-estrategiaCiego@estado       bssCOMRAM    000046
-estrategiaCiego@m            bssCOMRAM    00003A
-estrategiaClasica@estado     bssCOMRAM    000047
-estrategiaClasica@m          bssCOMRAM    00003E
-int$flags                    temp         00004D
-int_func                     intcode_body 000BBA
+_direccion                   dataCOMRAM   00004B
+_estadoMenu                  bssCOMRAM    000045
+_estrategiaAdelante          text5        000934
+_estrategiaAtras             text4        00083E
+_estrategiaCiego             text3        000740
+_estrategiaClasica           text2        000012
+_init                        text7        000D6A
+_loop                        text1        000350
+_loop$319                    cstackBANK0  000077
+_loop$328                    cstackBANK0  000078
+_main                        text0        000E82
+_millis                      text6        000E70
+_millisCounter               bssBANK0     000079
+_setMotores                  text8        00056E
+_setMotores$933              cstackBANK0  000066
+_setMotores$934              cstackBANK0  000068
+btemp                        temp         00004C
+end_of_initialization        cinit        000E3E
+estrategiaAdelante@estado    dataCOMRAM   000047
+estrategiaAdelante@m         bssBANK0     000081
+estrategiaAtras@estado       dataCOMRAM   000046
+estrategiaAtras@m            bssBANK0     00007D
+estrategiaCiego@estado       dataCOMRAM   000048
+estrategiaCiego@m            bssBANK0     000085
+estrategiaClasica@estado     bssCOMRAM    000044
+estrategiaClasica@firstTime  dataCOMRAM   000049
+estrategiaClasica@m          bssCOMRAM    00003C
+int$flags                    temp         00004C
+int_func                     intcode_body 000CC0
 intlevel0                    text         000000
 intlevel1                    text         000000
 intlevel2                    text         000000
 intlevel3                    text         000000
-loop@estrategia              dataCOMRAM   00004B
-loop@m                       bssCOMRAM    000042
-setMotores@dutyD             cstackBANK0  00006E
-setMotores@dutyI             cstackBANK0  00006C
-setMotores@speedD            cstackCOMRAM 000038
-setMotores@speedI            cstackCOMRAM 000036
+loop@estrategia              dataCOMRAM   00004A
+loop@m                       bssCOMRAM    000040
+setMotores@dutyD             cstackBANK0  00006C
+setMotores@dutyI             cstackBANK0  00006A
+setMotores@speedD            cstackBANK0  000062
+setMotores@speedI            cstackBANK0  000060
 stackhi                      (abs)        0007FF
-stacklo                      (abs)        000087
+stacklo                      (abs)        000089
 start                        init         00000E
-start_initialization         cinit        000CFE
-wtemp6                       temp         00004E
+start_initialization         cinit        000E06
+wtemp6                       temp         00004D
 
 
 FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 328 in file "main.c"
+		line 345 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -593,7 +594,7 @@ Total ram usage:        7 bytes
 
  *************** function _estrategiaClasica *****************
  Defined at:
-		line 100 in file "main.c"
+		line 105 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -624,7 +625,7 @@ Total ram usage:        4 bytes
 
  *************** function _estrategiaCiego *****************
  Defined at:
-		line 212 in file "main.c"
+		line 251 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -640,9 +641,9 @@ Total ram usage:        4 bytes
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
       Params:         0       0       0       0       0       0       0       0       0
       Locals:         0       0       0       0       0       0       0       0       0
-      Temps:          0       4       0       0       0       0       0       0       0
-      Totals:         0       4       0       0       0       0       0       0       0
-Total ram usage:        4 bytes
+      Temps:          0       0       0       0       0       0       0       0       0
+      Totals:         0       0       0       0       0       0       0       0       0
+Total ram usage:        0 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    4
  This function calls:
@@ -655,7 +656,7 @@ Total ram usage:        4 bytes
 
  *************** function _estrategiaAtras *****************
  Defined at:
-		line 295 in file "main.c"
+		line 312 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -686,7 +687,7 @@ Total ram usage:        0 bytes
 
  *************** function _estrategiaAdelante *****************
  Defined at:
-		line 262 in file "main.c"
+		line 279 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -783,11 +784,11 @@ Total ram usage:        0 bytes
  Defined at:
 		line 66 in file "funciones.c"
  Parameters:    Size  Location     Type
-  speedI          2   53[COMRAM] int 
-  speedD          2   55[COMRAM] int 
+  speedI          2    0[BANK0 ] int 
+  speedD          2    2[BANK0 ] int 
  Auto vars:     Size  Location     Type
-  dutyD           2   14[BANK0 ] unsigned int 
-  dutyI           2   12[BANK0 ] unsigned int 
+  dutyD           2   12[BANK0 ] unsigned int 
+  dutyI           2   10[BANK0 ] unsigned int 
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
@@ -797,10 +798,10 @@ Total ram usage:        0 bytes
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
-      Params:         4       0       0       0       0       0       0       0       0
+      Params:         0       4       0       0       0       0       0       0       0
       Locals:         0       8       0       0       0       0       0       0       0
       Temps:          0       2       0       0       0       0       0       0       0
-      Totals:         4      10       0       0       0       0       0       0       0
+      Totals:         0      14       0       0       0       0       0       0       0
 Total ram usage:       14 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    3
@@ -854,9 +855,9 @@ Total ram usage:        3 bytes
  Parameters:    Size  Location     Type
   f1              3   44[COMRAM] float 
  Auto vars:     Size  Location     Type
-  lval            4    1[BANK0 ] unsigned long 
-  exp1            1    5[BANK0 ] unsigned char 
-  sign1           1    0[BANK0 ] unsigned char 
+  lval            4   54[COMRAM] unsigned long 
+  exp1            1   58[COMRAM] unsigned char 
+  sign1           1   53[COMRAM] unsigned char 
  Return value:  Size  Location     Type
                   4   44[COMRAM] long 
  Registers used:
@@ -867,9 +868,9 @@ Total ram usage:        3 bytes
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
       Params:         4       0       0       0       0       0       0       0       0
-      Locals:         0       6       0       0       0       0       0       0       0
+      Locals:         6       0       0       0       0       0       0       0       0
       Temps:          5       0       0       0       0       0       0       0       0
-      Totals:         9       6       0       0       0       0       0       0       0
+      Totals:        15       0       0       0       0       0       0       0       0
 Total ram usage:       15 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    1
@@ -981,45 +982,45 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
-		___ftpack      		CODE           	0B0C	0000	175
+		___ftpack      		CODE           	0C12	0000	175
 
 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c estimated size: 175
 
 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
-		___ftmul       		CODE           	0A18	0000	245
+		___ftmul       		CODE           	0B1E	0000	245
 
 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c estimated size: 245
 
 funciones.c
-		_millis        		CODE           	0D68	0000	19
-		_init          		CODE           	0C64	0000	155
+		_millis        		CODE           	0E70	0000	19
+		_init          		CODE           	0D6A	0000	157
 		_ISR           		CODE           	0008	0000	177
-		_setMotores    		CODE           	03FA	0000	471
+		_setMotores    		CODE           	056E	0000	467
 
-funciones.c estimated size: 822
+funciones.c estimated size: 820
 
 shared
-		__initialization		CODE           	0CFE	0000	57
+		__initialization		CODE           	0E06	0000	57
 
 shared estimated size: 57
 
 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
-		___fttol       		CODE           	0734	0000	249
+		___fttol       		CODE           	0A2A	0000	245
 
-C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c estimated size: 249
+C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c estimated size: 245
 
 main.c
-		_loop          		CODE           	0012	0000	527
-		_estrategiaAdelante		CODE           	0922	0000	247
-		_estrategiaCiego		CODE           	05D0	0000	357
-		_estrategiaAtras		CODE           	082C	0000	247
-		_main          		CODE           	0D7A	0000	11
-		_estrategiaClasica		CODE           	0220	0000	475
+		_loop          		CODE           	0350	0000	543
+		_estrategiaAdelante		CODE           	0934	0000	247
+		_estrategiaCiego		CODE           	0740	0000	255
+		_estrategiaAtras		CODE           	083E	0000	247
+		_main          		CODE           	0E82	0000	11
+		_estrategiaClasica		CODE           	0012	0000	831
 
-main.c estimated size: 1864
+main.c estimated size: 2134
 
 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwtoft.c
-		___lwtoft      		CODE           	0D44	0000	37
+		___lwtoft      		CODE           	0E4C	0000	37
 
 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwtoft.c estimated size: 37
 

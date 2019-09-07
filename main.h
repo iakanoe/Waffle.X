@@ -93,16 +93,19 @@ enum { // Estados menu
 };
 
 enum { // Estados estrategias
-    ANALISIS,
-    ATAQUE,
-    DER,
-    DERA,
-    DERAV,
-    IZQ,
-    IZQA,
-    IZQAV,
-    ATRAS,
-    POSICIONAR,
-    AVANZAR,
-    FRENAR
+    ANALISIS, // Estado para decidir acción (todas las estrategias)
+    ATAQUE, // Ataque (clásica)
+    DER, // Giro rápido a la derecha (clásica)
+    DERA, // Giro abierto a la derecha (clásica)
+    DERAV, // Giro muy abierto a la derecha (clásica)
+    IZQ, // Giro rápido a la izquierda (clásica)
+    IZQA, // Giro abierto a la izquierda (clásica)
+    IZQAV, // Giro muy abierto a la izquierda (clásica)
+    BUSCA_DER, // Búsqueda girando a la derecha (clasica)
+    BUSCA_IZQ, // Búsqueda girando a la izquierda (clasica)
+    ATRAS, // Ir atrás al ver la línea (clásica/ciego)
+    POSICIONAR, // Posicionamiento (adelante/atrás)
+    AVANZAR, // Avanzar por tiempo (adelante/atrás) o hasta ver la línea (ciego)
+    FRENAR, // Frenar por tiempo (adelante/atrás)
+    GIRO // Girar por tiempo (ciego))
 };
